@@ -1,0 +1,15 @@
+/.idea/
+/Brainstorm.API/.idea/
+/Brainstorm.API/Brainstorm.API/bin/
+/Brainstorm.API/Brainstorm.API/obj/
+/Brainstorm.API/Brainstorm.API/appsettings.json
+/Brainstorm.API/Brainstorm.API/appsettings.Development.json
+/Brainstorm.API/Brainstorm.Business/bin/
+/Brainstorm.API/Brainstorm.Business/obj/
+/Brainstorm.API/Brainstorm.Data/bin/
+/Brainstorm.API/Brainstorm.Data/obj/
+/Brainstorm.API/Brainstorm.Migrations/bin/
+/Brainstorm.API/Brainstorm.Migrations/obj/
+/Brainstorm.API/Brainstorm.UnitTests/bin/
+/Brainstorm.API/Brainstorm.UnitTests/obj/
+/Brainstorm.API/Debug/

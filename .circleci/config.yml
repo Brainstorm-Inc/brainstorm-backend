@@ -7,10 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
+          command: ls
+      - run:
           working_directory: ~/Brainstorm.API
           name: Run tests
-          command:
-            dotnet test
+          command: dotnet test
   build:
     docker:
       - image: alpine
@@ -21,7 +22,7 @@ jobs:
           command: apk add docker-cli
       - run:
           name: Login to docker service
-          command : echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
+          command: echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
       - run:
           working_directory: ~/Booking.API
           name: Build docker image
@@ -30,7 +31,7 @@ jobs:
 
 
 workflows:
-  publish: 
+  publish:
     jobs:
       - test
       - build

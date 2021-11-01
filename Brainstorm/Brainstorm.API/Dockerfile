@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /app
 
-COPY ./Brainstorm.API.sln .
+COPY ./Brainstorm.sln .
 COPY ./Brainstorm.API/Brainstorm.API.csproj ./Brainstorm.API/Brainstorm.API.csproj
 COPY ./Brainstorm.Business/Brainstorm.Business.csproj ./Brainstorm.Business/Brainstorm.Business.csproj
 COPY ./Brainstorm.Data/Brainstorm.Data.csproj ./Brainstorm.Data/Brainstorm.Data.csproj

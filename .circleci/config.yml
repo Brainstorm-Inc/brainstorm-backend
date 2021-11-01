@@ -7,17 +7,18 @@ jobs:
     steps:
       - checkout
       - run:
-          working_directory: ~/Booking.API/Booking.API
+          working_directory: ~/Booking.API
           name: Run tests
           command:
             dotnet test
-  build-and-publish:
+  build:
     docker:
       - image: alpine
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
+      - run:
+          name: Install docker
+          command: apk add docker-cli
       - run:
           name: Login to docker service
           command : echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
@@ -32,4 +33,4 @@ workflows:
   publish: 
     jobs:
       - test
-      - build-and-publish
+      - build

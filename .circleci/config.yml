@@ -17,9 +17,8 @@ jobs:
       - image: alpine
     steps:
       - checkout
-      - run:
-          name: Install docker
-          command: apk add docker-cli
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: Login to docker service
           command: echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin

@@ -23,9 +23,9 @@ jobs:
           name: Login to docker service
           command : echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
       - run:
-          working_directory: ~/Booking.API/Booking.API
+          working_directory: ~/brainstorm-backend/Booking.API
           name: Build docker image
-          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH
+          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH .
       - run: docker push alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH
 
 

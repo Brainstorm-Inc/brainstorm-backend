@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          working_directory: ~/brainstorm-backend/Brainstorm.API
+          working_directory: ~/Brainstorm.API
           name: Run tests
           command:
             dotnet test
@@ -23,7 +23,7 @@ jobs:
           name: Login to docker service
           command : echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
       - run:
-          working_directory: ~/brainstorm-backend/Booking.API
+          working_directory: ~/Booking.API
           name: Build docker image
           command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH .
       - run: docker push alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH

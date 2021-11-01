@@ -26,7 +26,7 @@ jobs:
       - run:
           working_directory: ~/project/Brainstorm
           name: Build docker image
-          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH -f ~/Brainstorm/Brainstorm.API/Dockerfile .
+          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH -f ~/project/Brainstorm/Brainstorm.API/Dockerfile .
       - run: docker push alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH
 
 

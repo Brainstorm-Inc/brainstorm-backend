@@ -1,0 +1,15 @@
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/Brainstorm.Business.deps.json
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/Brainstorm.Business.dll
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/ref/Brainstorm.Business.dll
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/Brainstorm.Business.pdb
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/Brainstorm.Data.dll
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/bin/Release/net5.0/Brainstorm.Data.pdb
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.csproj.AssemblyReference.cache
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.GeneratedMSBuildEditorConfig.editorconfig
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.AssemblyInfoInputs.cache
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.AssemblyInfo.cs
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.csproj.CoreCompileInputs.cache
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.csproj.CopyComplete
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.dll
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/ref/Brainstorm.Business.dll
+/home/padfoot/Uni/Sem5/CP/brainstorm-backend/Brainstorm.API/Brainstorm.Business/obj/Release/net5.0/Brainstorm.Business.pdb

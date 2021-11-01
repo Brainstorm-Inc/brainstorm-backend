@@ -9,7 +9,7 @@ jobs:
       - run:
           command: ls
       - run:
-          working_directory: ~/Brainstorm
+          working_directory: /root/Brainstorm
           name: Run tests
           command: dotnet test
   build:
@@ -26,7 +26,7 @@ jobs:
       - run:
           working_directory: ~/Brainstorm
           name: Build docker image
-          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH .
+          command: docker build -t alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH -f ~/Brainstorm/Brainstorm.API/Dockerfile .
       - run: docker push alexpetrean80/brainstorm-backend:$CIRCLE_BRANCH
 
 

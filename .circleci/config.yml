@@ -14,7 +14,7 @@ jobs:
           command: dotnet test
   build:
     docker:
-      - image: alpine
+      - image: cimg/base:2020.04
     steps:
       - checkout
       - setup_remote_docker:

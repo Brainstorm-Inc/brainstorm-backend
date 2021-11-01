@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ls
+          command: pwd
       - run:
           working_directory: /root/Brainstorm
           name: Run tests

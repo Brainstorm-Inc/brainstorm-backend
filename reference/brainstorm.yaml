@@ -81,11 +81,7 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
   /Org:
     post:
       summary: ''
@@ -132,18 +128,10 @@ paths:
           description: Accepted
       description: ''
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
   '/Org/{orgId}/users':
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
     get:
       summary: Your GET endpoint
       tags: []
@@ -158,16 +146,8 @@ paths:
                 $ref: '#/components/schemas/User'
   '/Org/{orgId}/user/{userId}':
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
+      - $ref: '#/components/parameters/userId'
     get:
       summary: Your GET endpoint
       tags: []
@@ -189,11 +169,7 @@ paths:
           description: Accepted
   '/Org/{orgId}/project':
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
     post:
       summary: ''
       operationId: post-org-orgId-project
@@ -214,11 +190,7 @@ paths:
         - Organization
   '/Org/{orgId}/projects':
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
     get:
       summary: Your GET endpoint
       tags:
@@ -236,16 +208,8 @@ paths:
       operationId: get-org-orgId-projects
   '/Org/{orgId}/project/{projectId}':
     parameters:
-      - schema:
-          type: string
-        name: orgId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: projectId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/orgId'
+      - $ref: '#/components/parameters/projectId'
     get:
       summary: Your GET endpoint
       tags:
@@ -257,11 +221,7 @@ paths:
       operationId: get-Org-orgId-project-projectId
   '/Project/{projectId}':
     parameters:
-      - schema:
-          type: string
-        name: projectId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/projectId'
     get:
       summary: Your GET endpoint
       tags:
@@ -294,11 +254,7 @@ paths:
           description: Accepted
   '/Project/{projectId}/topics':
     parameters:
-      - schema:
-          type: string
-        name: projectId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/projectId'
     get:
       summary: Your GET endpoint
       tags:
@@ -315,11 +271,7 @@ paths:
       operationId: get-Project-projectId-topics
   '/Project/{projectId}/topic':
     parameters:
-      - schema:
-          type: string
-        name: projectId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/projectId'
     post:
       summary: ''
       operationId: post-Project-projectId-topic
@@ -342,11 +294,7 @@ paths:
       responses: {}
       operationId: get-Topic-topicId
     parameters:
-      - schema:
-          type: string
-        name: topicId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/topicId'
 components:
   schemas:
     VersionCode:
@@ -677,6 +625,7 @@ components:
                 newDescription:
                   type: string
       description: ''
+      x-internal: false
     Rating:
       title: Rating
       type: object
@@ -772,5 +721,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Topic'
+  parameters:
+    orgId:
+      name: orgId
+      in: path
+      schema:
+        type: string
+        format: uuid
+      required: true
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    projectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    topicId:
+      name: topicId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
 security:
   - simpleauth: []

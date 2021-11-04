@@ -354,6 +354,7 @@ components:
     UserId:
       type: string
       title: UserId
+      format: uuid
       readOnly: true
     User:
       title: User
@@ -384,6 +385,7 @@ components:
     OrgId:
       type: string
       title: OrgId
+      format: uuid
       readOnly: true
     Organization:
       title: Organization
@@ -415,6 +417,7 @@ components:
     ProjectId:
       type: string
       title: ProjectId
+      format: uuid
       readOnly: true
     ProjectSummary:
       title: ProjectSummary
@@ -437,6 +440,7 @@ components:
     TopicId:
       type: string
       title: TopicId
+      format: uuid
       readOnly: true
     TopicSummary:
       title: TopicSummary
@@ -444,7 +448,7 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/TopicId'
-        summary:
+        title:
           type: string
         proposer:
           $ref: '#/components/schemas/UserId'
@@ -454,17 +458,18 @@ components:
         - $ref: '#/components/schemas/TopicSummary'
         - type: object
           properties:
-            '':
+            iterations:
+              type: array
+              items:
+                $ref: '#/components/schemas/IterationId'
+            creationDate:
               type: string
+              format: date-time
     IterationId:
+      type: string
       title: IterationId
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-      required:
-        - id
+      format: uuid
+      readOnly: true
     Iteration:
       title: Iteration
       type: object
@@ -480,18 +485,48 @@ components:
           items:
             type: string
         comments:
-          $ref: '#/components/schemas/CommentSectionId'
+          $ref: '#/components/schemas/CommentsSummary'
         deadline:
           type: string
           format: date-time
         timeline:
           $ref: '#/components/schemas/Timeline'
     CommentSectionId:
+      type: string
       title: Comment
+      format: uuid
+      readOnly: true
+    CommentSection:
+      title: CommentSection
       type: object
       properties:
         id:
           type: string
+    CommentId:
+      type: string
+      title: CommentId
+      format: uuid
+      readOnly: true
+    Comment:
+      title: Comment
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CommentId'
+    CommentsSummary:
+      title: CommentsSummary
+      type: object
+      properties:
+        lastActiveUsers:
+          type: array
+          maxItems: 5
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/UserId'
+        commentsAmount:
+          type: number
+        section:
+          $ref: '#/components/schemas/CommentSectionId'
     Timeline:
       title: Proposal
       type: object
@@ -499,21 +534,77 @@ components:
         id:
           type: array
           items:
-            anyOf:
+            oneOf:
               - $ref: '#/components/schemas/Proposal'
               - $ref: '#/components/schemas/Event'
+    ProposalId:
+      type: string
+      title: ProposalId
+      format: uuid
+      readOnly: true
     Proposal:
       title: Proposal
       type: object
       properties:
         id:
+          $ref: '#/components/schemas/ProposalId'
+        description:
           type: string
+        proposer:
+          $ref: '#/components/schemas/UserId'
+        creationDate:
+          type: string
+          format: date-time
+        comments:
+          $ref: '#/components/schemas/CommentsSummary'
+        rating:
+          $ref: '#/components/schemas/Rating'
+    EventId:
+      type: string
+      title: EventId
+      format: uuid
+      example: cd296f26-16c5-43b4-9f4f-cf30c9f6d6e4
     Event:
       title: Event
       type: object
       properties:
         id:
-          type: string
+          $ref: '#/components/schemas/EventId'
+    Rating:
+      title: Rating
+      type: object
+      properties:
+        '1':
+          type: number
+          description: Angry Emonji
+        '2':
+          type: number
+          description: Sad Emoji
+        '3':
+          type: number
+          description: Eh emoji
+        '4':
+          type: number
+          description: Happy Emoji
+        '5':
+          type: number
+          description: Love Emoji
+        yourVote:
+          type: array
+          uniqueItems: true
+          maxItems: 5
+          description: Emojis you have clicked on
+          items:
+            type: number
+            maximum: 5
+            minimum: 1
+        average:
+          type: number
+          description: Median average of all ratings
+          minimum: 0
+          maximum: 5
+          format: float
+          readOnly: true
   securitySchemes:
     simpleauth:
       type: oauth2
@@ -574,4 +665,4 @@ components:
           schema:
             $ref: '#/components/schemas/Topic'
 security:
-  - simpleauth: []o
+  - simpleauth: []

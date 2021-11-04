@@ -537,15 +537,12 @@ components:
           format: date-time
     Timeline:
       title: Timeline
-      type: object
-      properties:
-        id:
-          type: array
-          items:
-            oneOf:
-              - $ref: '#/components/schemas/Proposal'
-              - $ref: '#/components/schemas/Event'
       description: ''
+      type: array
+      items:
+        anyOf:
+          - $ref: '#/components/schemas/Proposal'
+          - $ref: '#/components/schemas/Event'
     ProposalId:
       type: string
       title: ProposalId

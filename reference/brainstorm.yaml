@@ -209,6 +209,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Project'
+      tags:
+        - Project
+        - Organization
   '/Org/{orgId}/projects':
     parameters:
       - schema:
@@ -218,7 +221,9 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Project
+        - Organization
       responses:
         '200':
           description: OK
@@ -243,7 +248,9 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Project
+        - Organization
       responses:
         '204':
           description: No Content
@@ -257,7 +264,8 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Project
       responses:
         '200':
           description: OK
@@ -293,7 +301,8 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Project
       responses:
         '200':
           description: OK
@@ -323,10 +332,13 @@ paths:
                 $ref: '#/components/schemas/Topic'
       requestBody:
         $ref: '#/components/requestBodies/Topic'
+      tags:
+        - Project
   '/Topic/{topicId}':
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Topic
       responses: {}
       operationId: get-Topic-topicId
     parameters:
@@ -450,7 +462,7 @@ components:
           $ref: '#/components/schemas/TopicId'
         title:
           type: string
-        proposer:
+        author:
           $ref: '#/components/schemas/UserId'
     Topic:
       title: Topic
@@ -493,7 +505,7 @@ components:
           $ref: '#/components/schemas/Timeline'
     CommentSectionId:
       type: string
-      title: Comment
+      title: CommentSectionId
       format: uuid
       readOnly: true
     CommentSection:
@@ -501,7 +513,15 @@ components:
       type: object
       properties:
         id:
-          type: string
+          $ref: '#/components/schemas/CommentSectionId'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        parent:
+          oneOf:
+            - $ref: '#/components/schemas/ProposalId'
+            - $ref: '#/components/schemas/IterationId'
     CommentId:
       type: string
       title: CommentId
@@ -513,6 +533,23 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/CommentId'
+        author:
+          $ref: '#/components/schemas/UserId'
+        content:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        rating:
+          $ref: '#/components/schemas/Rating'
+        replyTo:
+          oneOf:
+            - $ref: '#/components/schemas/CommentId'
+            - type: 'null'
+        proposal:
+          oneOf:
+            - $ref: '#/components/schemas/ProposalId'
+            - type: 'null'
     CommentsSummary:
       title: CommentsSummary
       type: object
@@ -527,6 +564,9 @@ components:
           type: number
         section:
           $ref: '#/components/schemas/CommentSectionId'
+        lastCommentDate:
+          type: string
+          format: date-time
     Timeline:
       title: Proposal
       type: object
@@ -550,11 +590,15 @@ components:
           $ref: '#/components/schemas/ProposalId'
         description:
           type: string
-        proposer:
+        author:
           $ref: '#/components/schemas/UserId'
         creationDate:
           type: string
           format: date-time
+        files:
+          type: array
+          items:
+            type: string
         comments:
           $ref: '#/components/schemas/CommentsSummary'
         rating:
@@ -566,10 +610,73 @@ components:
       example: cd296f26-16c5-43b4-9f4f-cf30c9f6d6e4
     Event:
       title: Event
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/EventId'
+      allOf:
+        - type: object
+          description: dang
+          properties:
+            id:
+              $ref: '#/components/schemas/EventId'
+            author:
+              oneOf:
+                - $ref: '#/components/schemas/UserId'
+                - type: 'null'
+            type:
+              type: string
+              enum:
+                - description change
+                - goal update
+                - deadline update
+                - comment upgrade
+                - proposal accepted
+        - oneOf:
+            - type: object
+              description: yo
+              properties:
+                type:
+                  type: string
+                  example: comment upgrade
+                comment:
+                  $ref: '#/components/schemas/CommentId'
+                proposal:
+                  $ref: '#/components/schemas/ProposalId'
+            - type: object
+              description: 'no'
+              properties:
+                type:
+                  type: string
+                  example: proposal accepted
+                proposal:
+                  $ref: '#/components/schemas/ProposalId'
+            - type: object
+              properties:
+                type:
+                  type: string
+                  example: deadline update
+                oldDeadline:
+                  type: string
+                  format: date-time
+                newDeadline:
+                  type: string
+                  format: date-time
+            - type: object
+              properties:
+                type:
+                  type: string
+                  example: goal update
+                oldGoal:
+                  type: string
+                newGoal:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  example: description change
+                oldDescription:
+                  type: string
+                newDescription:
+                  type: string
+      description: ''
     Rating:
       title: Rating
       type: object
@@ -609,10 +716,11 @@ components:
     simpleauth:
       type: oauth2
       flows:
-        clientCredentials:
-          tokenUrl: ''
+        password:
+          tokenUrl: /Auth/login
           refreshUrl: ''
           scopes: {}
+      description: ''
   requestBodies:
     Signup:
       content:

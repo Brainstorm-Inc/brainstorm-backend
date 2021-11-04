@@ -536,7 +536,7 @@ components:
           type: string
           format: date-time
     Timeline:
-      title: Proposal
+      title: Timeline
       type: object
       properties:
         id:
@@ -545,6 +545,7 @@ components:
             oneOf:
               - $ref: '#/components/schemas/Proposal'
               - $ref: '#/components/schemas/Event'
+      description: ''
     ProposalId:
       type: string
       title: ProposalId

@@ -25,6 +25,7 @@ paths:
                 $ref: '#/components/schemas/VersionCode'
       operationId: get-AppVersion-version
       description: Retrieves the version of the app
+      security: []
   /Auth/login:
     parameters: []
     post:
@@ -36,6 +37,7 @@ paths:
       description: ''
       requestBody:
         $ref: '#/components/requestBodies/Login'
+      security: []
   /Auth/signup:
     post:
       summary: ''
@@ -408,10 +410,23 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/TopicId'
+        type:
+          type: string
+          enum:
+            - simple
+            - complex
         title:
           type: string
         author:
           $ref: '#/components/schemas/UserId'
+        highlightedProposal:
+          $ref: '#/components/schemas/ProposalId'
+        activeUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
+        currentIteration:
+          $ref: '#/components/schemas/IterationId'
     Topic:
       title: Topic
       allOf:
@@ -436,6 +451,11 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/IterationId'
+        position:
+          type: number
+          example: 3
+        open:
+          type: boolean
         goal:
           type: string
         description:

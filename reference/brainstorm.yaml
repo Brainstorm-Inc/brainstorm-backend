@@ -14,7 +14,7 @@ servers:
 paths:
   /AppVersion/version:
     get:
-      summary: Your GET endpoint
+      summary: Get Api Version
       tags: []
       responses:
         '200':
@@ -29,7 +29,7 @@ paths:
   /Auth/login:
     parameters: []
     post:
-      summary: ''
+      summary: Login User
       operationId: post-auth-login
       responses:
         '200':
@@ -38,9 +38,11 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Login'
       security: []
+      tags:
+        - Auth
   /Auth/signup:
     post:
-      summary: ''
+      summary: SignUp user
       operationId: post-auth-signup
       responses:
         '200':
@@ -49,11 +51,14 @@ paths:
       security: []
       requestBody:
         $ref: '#/components/requestBodies/Signup'
+      tags:
+        - Auth
     parameters: []
   '/User/{userId}':
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get Info about a User
+      tags:
+        - User
       responses:
         '200':
           description: OK
@@ -64,7 +69,7 @@ paths:
       operationId: get-user
       parameters: []
     put:
-      summary: ''
+      summary: Update User Info
       operationId: put-user
       responses:
         '200':
@@ -82,11 +87,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+      tags:
+        - User
     parameters:
       - $ref: '#/components/parameters/userId'
   /Org:
     post:
-      summary: ''
+      summary: Create an Organization
       operationId: post-org
       responses:
         '200':
@@ -97,11 +104,12 @@ paths:
                 $ref: '#/components/schemas/Organization'
       requestBody:
         $ref: '#/components/requestBodies/Organization'
+      tags:
+        - Organization
     parameters: []
   '/Org/{orgId}':
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get Organization Info
       responses:
         '200':
           description: OK
@@ -110,8 +118,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Organization'
       operationId: get-org
+      tags:
+        - Organization
     put:
-      summary: ''
+      summary: Update Organization Info
       operationId: put-org
       responses:
         '200':
@@ -122,21 +132,26 @@ paths:
                 $ref: '#/components/schemas/Organization'
       requestBody:
         $ref: '#/components/requestBodies/Organization'
+      tags:
+        - Organization
     delete:
-      summary: ''
+      summary: Delete an Organization
       operationId: delete-org
       responses:
         '202':
           description: Accepted
       description: ''
+      tags:
+        - Organization
     parameters:
       - $ref: '#/components/parameters/orgId'
   '/Org/{orgId}/users':
     parameters:
       - $ref: '#/components/parameters/orgId'
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get Organization Members
+      tags:
+        - Organization
       responses: {}
       operationId: get-org-orgId-users
       requestBody:
@@ -146,34 +161,40 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/User'
+      description: ''
   '/Org/{orgId}/user/{userId}':
     parameters:
       - $ref: '#/components/parameters/orgId'
       - $ref: '#/components/parameters/userId'
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: See if User is in an Organizaiton
+      tags:
+        - Organization
       responses:
         '204':
           description: No Content
       operationId: get-org-rgId-user-userId
     post:
-      summary: ''
+      summary: Add a user to an Organization
       operationId: post-org-orgId-user-userId
       responses:
         '201':
           description: Created
+      tags:
+        - Organization
     delete:
-      summary: ''
+      summary: Remove an User from an Organization
       operationId: delete-org-orgId-user-userId
       responses:
         '202':
           description: Accepted
+      tags:
+        - Organization
   '/Org/{orgId}/project':
     parameters:
       - $ref: '#/components/parameters/orgId'
     post:
-      summary: ''
+      summary: Create a Project in an Organization
       operationId: post-org-orgId-project
       responses:
         '201':
@@ -194,7 +215,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/orgId'
     get:
-      summary: Your GET endpoint
+      summary: Get Organization Projects
       tags:
         - Project
         - Organization
@@ -213,7 +234,7 @@ paths:
       - $ref: '#/components/parameters/orgId'
       - $ref: '#/components/parameters/projectId'
     get:
-      summary: Your GET endpoint
+      summary: Check if a Project is in an Organization
       tags:
         - Project
         - Organization
@@ -225,7 +246,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/projectId'
     get:
-      summary: Your GET endpoint
+      summary: Get Project Info
       tags:
         - Project
       responses:
@@ -237,7 +258,7 @@ paths:
                 $ref: '#/components/schemas/Project'
       operationId: get-org-orgId-project-projectId
     put:
-      summary: ''
+      summary: Update Project Info
       operationId: put-Org-orgId-project-projectId
       responses:
         '200':
@@ -248,17 +269,21 @@ paths:
                 $ref: '#/components/schemas/Project'
       requestBody:
         $ref: '#/components/requestBodies/Project'
+      tags:
+        - Project
     delete:
-      summary: ''
+      summary: Delete a Project
       operationId: delete-Org-orgId-project-projectId
       responses:
         '202':
           description: Accepted
+      tags:
+        - Project
   '/Project/{projectId}/topics':
     parameters:
       - $ref: '#/components/parameters/projectId'
     get:
-      summary: Your GET endpoint
+      summary: Get Project Topics
       tags:
         - Project
       responses:
@@ -271,11 +296,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/TopicSummary'
       operationId: get-Project-projectId-topics
+      description: ''
   '/Project/{projectId}/topic':
     parameters:
       - $ref: '#/components/parameters/projectId'
     post:
-      summary: ''
+      summary: Create a Topic in a Project
       operationId: post-Project-projectId-topic
       responses:
         '200':
@@ -290,7 +316,7 @@ paths:
         - Project
   '/Topic/{topicId}':
     get:
-      summary: Your GET endpoint
+      summary: Get Topic Info
       tags:
         - Topic
       responses: {}

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Brainstorm.Business.AppVersions.Models;
 using Brainstorm.Business.AppVersions.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,7 @@
+using System;
+
 namespace Brainstorm.Entities {
     public abstract class BaseEntity {
-        public ulong Id { get; init; }
+        public Guid Id { get; init; }
     }
 }

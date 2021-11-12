@@ -1,4 +1,3 @@
-using System.ComponentModel.Design;
 using Brainstorm.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;

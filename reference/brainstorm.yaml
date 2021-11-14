@@ -319,10 +319,181 @@ paths:
       summary: Get Topic Info
       tags:
         - Topic
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
       operationId: get-Topic-topicId
     parameters:
       - $ref: '#/components/parameters/topicId'
+  '/Topic/{topicId}/iterations':
+    parameters:
+      - schema:
+          type: string
+        name: topicId
+        in: path
+        required: true
+    get:
+      summary: Get Detailed Iterations Info
+      tags: []
+      responses: {}
+      operationId: get-Topic-topicId-iterations
+    post:
+      summary: Create an Iteration
+      operationId: post-Topic-topicId-iterations
+      responses:
+        '200':
+          description: OK
+  '/Iteration/{iterationId}':
+    parameters:
+      - schema:
+          type: string
+        name: iterationId
+        in: path
+        required: true
+    get:
+      summary: Get info about an Iteration
+      tags: []
+      responses: {}
+      operationId: get-Iteration-iterationId
+    put:
+      summary: Update an Iteration
+      operationId: put-Iteration-iterationId
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Close an Iteration
+      operationId: delete-Iteration-iterationId
+      responses:
+        '200':
+          description: OK
+  '/Iteration/{iterationId}/timeline':
+    parameters:
+      - schema:
+          type: string
+        name: iterationId
+        in: path
+        required: true
+    get:
+      summary: Get Timeline of an Interation
+      tags: []
+      responses: {}
+      operationId: get-Iteration-iterationId-timeline
+  '/Iteration/{iterationId}/proposal':
+    parameters:
+      - schema:
+          type: string
+        name: iterationId
+        in: path
+        required: true
+    post:
+      summary: Create a proposal on an Iteration
+      operationId: post-Iteration-iterationId-proposal
+      responses:
+        '200':
+          description: OK
+  '/Proposal/{proposalId}':
+    parameters:
+      - schema:
+          type: string
+        name: proposalId
+        in: path
+        required: true
+    get:
+      summary: Get Proposal
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+      operationId: get-Proposal-proposalId
+    put:
+      summary: Update Proposal
+      operationId: put-Proposal-proposalId
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: Add Third-Party additions to Proposals
+      operationId: patch-Proposal-proposalId
+      responses:
+        '200':
+          description: OK
+      description: 'Ex: ratings'
+  '/Proposal/{proposalId}/comment':
+    parameters:
+      - schema:
+          type: string
+        name: proposalId
+        in: path
+        required: true
+    post:
+      summary: Create a Comment on a Proposal
+      operationId: post-Proposal-proposalId-comment
+      responses:
+        '200':
+          description: OK
+  '/Proposal/{proposalId}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: proposalId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-Proposal-proposalId-comments
+  '/Proposal/{proposalId}/comment/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: proposalId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-Proposal-proposalId-comment-commentId
+    patch:
+      summary: Add Third-Party additions to Comments
+      operationId: patch-Proposal-proposalId-comment-commentId
+      responses:
+        '200':
+          description: OK
+      description: 'Ex: Reactions'
+    put:
+      summary: Update comment
+      operationId: put-Proposal-proposalId-comment-commentId
+      responses:
+        '200':
+          description: OK
+  '/Event/{eventId}':
+    parameters:
+      - schema:
+          type: string
+        name: eventId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-Event-eventId
 components:
   schemas:
     VersionCode:
@@ -497,17 +668,12 @@ components:
           format: date-time
         timeline:
           $ref: '#/components/schemas/Timeline'
-    CommentSectionId:
-      type: string
-      title: CommentSectionId
-      format: uuid
-      readOnly: true
     CommentSection:
       title: CommentSection
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/CommentSectionId'
+          $ref: '#/components/schemas/ProposalId'
         comments:
           type: array
           items:
@@ -556,8 +722,6 @@ components:
             $ref: '#/components/schemas/UserId'
         commentsAmount:
           type: number
-        section:
-          $ref: '#/components/schemas/CommentSectionId'
         lastCommentDate:
           type: string
           format: date-time

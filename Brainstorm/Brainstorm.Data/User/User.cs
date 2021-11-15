@@ -6,19 +6,9 @@ namespace Brainstorm.Entities.User
 {
     public class User : BaseEntity
     {
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Email {get; }
-        public string ProfilePicture {get; }
-
-         
-        public User(string firstName, string lastName, string email)
-        {
-            Id = Guid.NewGuid();
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            ProfilePicture = $"https://robohash.org/{FirstName}-{LastName}.png";
-        }
+        public string FirstName { get; init;}
+        public string LastName { get; init; }
+        public string Email {get; init; }
+        public string ProfilePicture {get; init; }
     }
 }

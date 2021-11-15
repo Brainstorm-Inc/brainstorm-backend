@@ -541,6 +541,12 @@ components:
         - lastName
         - email
         - profilePic
+      examples:
+        - id: string
+          firstName: string
+          lastName: string
+          email: string
+          profilePic: string
     OrgId:
       type: string
       title: OrgId

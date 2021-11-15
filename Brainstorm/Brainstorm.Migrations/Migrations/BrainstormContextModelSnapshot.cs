@@ -40,7 +40,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4541747f-1608-4836-9bc3-ac01cae1c53a"),
+                            Id = new Guid("73f3221f-becb-4561-9e9b-35514c981c77"),
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
@@ -70,10 +70,6 @@ namespace Booking.Migrations.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("LastName");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("ProfilePicture")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text")
@@ -81,19 +77,16 @@ namespace Booking.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("01143f01-7b4a-4aad-8e87-6de87e34d9cc"),
-                            Email = "test@test.ro",
-                            FirstName = "test",
-                            LastName = "test",
-                            Password = "password"
+                            Id = new Guid("78c14057-e37a-42d3-9969-8064a3ca7f03"),
+                            Email = "Fname-Lname@mail.com",
+                            FirstName = "Fname",
+                            LastName = "Lname",
+                            ProfilePicture = "https://robohash.org/Fname-Lname.png"
                         });
                 });
 #pragma warning restore 612, 618

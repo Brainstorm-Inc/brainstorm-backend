@@ -8,6 +8,8 @@ namespace Brainstorm.Entities.AppVersion
     {
         public void Configure(EntityTypeBuilder<AppVersion> builder)
         {
+            builder.Property(v => v.Id).HasColumnType($"uuid");
+            
             builder.Property(v => v.MajorVersion).IsRequired();
             builder.Property(v => v.MinorVersion).HasDefaultValue(0);
             builder.HasData(new AppVersion

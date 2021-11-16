@@ -1,20 +1,18 @@
-﻿using Brainstorm.Business.Auth.Commands;
-using Brainstorm.Business.Auth.Responses;
-using Brainstorm.Entities;
-using Brainstorm.Entities.User;
-using MediatR;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Brainstorm.Business.Auth.Commands;
+using Brainstorm.Business.Auth.Responses;
+using Brainstorm.Entities;
+using MediatR;
 
 namespace Brainstorm.Business.Auth.Handlers
 {
     class SignupHandler : IRequestHandler<SignupCommand, SignupResponse>
     {
-        private readonly BrainstormContext _ctx;
+        private BrainstormContext _ctx;
+
         public SignupHandler(BrainstormContext ctx)
         {
             _ctx = ctx;
@@ -22,22 +20,27 @@ namespace Brainstorm.Business.Auth.Handlers
 
         public Task<SignupResponse> Handle(SignupCommand request, CancellationToken cancellationToken)
         {
-            var exists = _ctx.Users.Where(u => u.Email == request.Email).Any(); 
-            if (exists)
+            if (_ctx.Users.FirstOrDefault(u => u.Email == request.Email) is not null)
             {
                 throw new Exception($"User with email {request.Email} already exists.");
             }
 
-            var user = new User { 
-                FirstName = request.FirstName, 
-                LastName = request.LastName, 
-                Email = request.Email,
-                ProfilePicture = $"https://robohash.org/{request.FirstName}-{request.LastName}.png"
-            };
+            var user = request.ToUser();
+
             _ctx.Users.Add(user);
             _ctx.SaveChanges();
 
-            return Task.FromResult(new SignupResponse());
+            var token = AuthUtils.GenerateToken(user.Email);
+            var res = new SignupResponse
+            {
+                Id = user.Id,
+                Email = request.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ProfilePicture = user.ProfilePicture,
+                Token = token
+            };
+            return Task.FromResult(res);
         }
     }
 }

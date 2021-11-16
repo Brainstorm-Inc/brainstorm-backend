@@ -10,15 +10,5 @@ namespace Brainstorm.Entities.User
         public string LastName { get; init; }
         public string Email {get; init; }
         public string ProfilePicture {get; init; }
-
-         
-        public User(string firstName, string lastName, string email)
-        {
-            Id = Guid.NewGuid();
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            ProfilePicture = $"https://robohash.org/{FirstName}-{LastName}.png";
-        }
     }
 }

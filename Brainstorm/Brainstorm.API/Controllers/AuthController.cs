@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Brainstorm.API.Requests;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brainstorm.API.Controllers
@@ -17,15 +16,6 @@ namespace Brainstorm.API.Controllers
             _mediator = mediator;
         }
 
-        [AllowAnonymous]
-        [HttpPost("signup")]
-        public async Task<ActionResult> Signup([FromBody] SignupRequest request)
-        {
-            var res = await _mediator.Send(request.ToCommand());
-            return Ok(res);
-        }
-        
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginRequest request)
         {

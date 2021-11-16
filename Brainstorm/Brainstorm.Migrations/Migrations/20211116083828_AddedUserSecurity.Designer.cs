@@ -3,15 +3,17 @@ using System;
 using Brainstorm.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Booking.Migrations.Migrations
 {
     [DbContext(typeof(BrainstormContext))]
-    partial class BrainstormContextModelSnapshot : ModelSnapshot
+    [Migration("20211116083828_AddedUserSecurity")]
+    partial class AddedUserSecurity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4541747f-1608-4836-9bc3-ac01cae1c53a"),
+                            Id = new Guid("ef42a592-4e5b-4808-80ab-3c042b7594ec"),
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
@@ -79,22 +81,16 @@ namespace Booking.Migrations.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("https://robohash.org/first-last");
 
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("01143f01-7b4a-4aad-8e87-6de87e34d9cc"),
-                            Email = "test@test.ro",
-                            FirstName = "test",
-                            LastName = "test",
-                            Password = "password"
-                        });
                 });
 #pragma warning restore 612, 618
         }

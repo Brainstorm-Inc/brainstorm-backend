@@ -74,6 +74,7 @@ namespace Booking.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+
                     b.Property<string>("ProfilePicture")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text")
@@ -94,6 +95,7 @@ namespace Booking.Migrations.Migrations
                             FirstName = "test",
                             LastName = "test",
                             Password = "password"
+
                         });
                 });
 #pragma warning restore 612, 618

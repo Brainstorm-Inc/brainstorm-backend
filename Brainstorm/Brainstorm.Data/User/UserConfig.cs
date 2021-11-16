@@ -29,11 +29,18 @@ namespace Brainstorm.Entities.User
             builder.Property(s => s.Password)
                 .IsRequired();
 
-            builder.Property(s => s.Salt)
-                .IsRequired();
-
             builder.Property(u => u.ProfilePicture)
                 .HasDefaultValue("https://robohash.org/first-last");
+
+            builder.HasData(
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "test",
+                    LastName = "test",
+                    Email = "test@test.ro",
+                    Password = "password",
+                });
         }
     }
 }

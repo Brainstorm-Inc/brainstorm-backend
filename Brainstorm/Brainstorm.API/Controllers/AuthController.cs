@@ -1,16 +1,12 @@
-﻿using Brainstorm.API.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Brainstorm.API.Requests;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Brainstorm.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -20,11 +16,12 @@ namespace Brainstorm.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("signup")]
-        public async Task SignUp([FromBody] SignupRequest request)
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] LoginRequest request)
         {
-            var res = await _mediator.Send(request.ToCommand());
-            Ok(res);
-        } 
+            var res = await _mediator.Send(request.ToQuery());
+
+            return Ok(res);
+        }
     }
 }

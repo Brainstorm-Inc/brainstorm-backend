@@ -33,7 +33,7 @@ paths:
       operationId: post-auth-login
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/AuthResponse'
       description: ''
       requestBody:
         $ref: '#/components/requestBodies/Login'
@@ -46,7 +46,7 @@ paths:
       operationId: post-auth-signup
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/AuthResponse'
       description: ''
       security: []
       requestBody:
@@ -964,5 +964,34 @@ components:
       schema:
         type: string
         format: uuid
+  responses:
+    AuthResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+              profilePicture:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+                format: email
+              id:
+                type: string
+                format: uuid
+            required:
+              - token
+              - profilePicture
+              - firstName
+              - lastName
+              - email
+              - id
 security:
   - simpleauth: []

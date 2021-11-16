@@ -9,7 +9,6 @@ namespace Brainstorm.Entities.User
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(u => u.Id).HasColumnType($"uuid");
-            
             builder.Property(u => u.FirstName).IsRequired()
                                                   .HasDefaultValue("FirstName");
             builder.Property(u => u.LastName).IsRequired()
@@ -20,7 +19,12 @@ namespace Brainstorm.Entities.User
 
 
             builder.Property(u => u.ProfilePicture).HasDefaultValue("https://robohash.org/first-last");
-            builder.HasData(new User("Fname","Lname", "Fname-Lname@mail.com"));
+            builder.HasData(new User
+            {
+                FirstName ="Fname",
+                LastName ="Lname", 
+                Email="Fname-Lname@mail.com"
+            });
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Brainstorm.Business.Auth
+namespace Brainstorm.Business.Utils
 {
     public static class AuthUtils
     {

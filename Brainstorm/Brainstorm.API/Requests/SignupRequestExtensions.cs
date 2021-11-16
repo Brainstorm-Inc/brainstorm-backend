@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Brainstorm.Business.Auth.Commands;
+﻿using Brainstorm.Business.Auth.Commands;
 
 namespace Brainstorm.API.Requests
 {
-    public static class SignupRequestExtentions
+    public static class SignupRequestExtensions
     {
         public static SignupCommand ToCommand(this SignupRequest request)
         {

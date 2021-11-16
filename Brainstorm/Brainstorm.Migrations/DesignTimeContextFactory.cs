@@ -10,7 +10,7 @@ namespace Booking.Migrations {
         public BrainstormContext CreateDbContext(string[] args) {
             var builder = new DbContextOptionsBuilder<BrainstormContext>()
                 .UseNpgsql(
-                    "host=localhost;user id=postgres;password=123;database=brainstorm;Pooling=false;Timeout=300;CommandTimeout=300;", x => x.MigrationsAssembly(MigrationsAssemblyName));
+                    "host=localhost;user id=postgres;password=postgres;database=brainstorm;Pooling=false;Timeout=300;CommandTimeout=300;", x => x.MigrationsAssembly(MigrationsAssemblyName));
             return new BrainstormContext(builder.Options);
         }
     }

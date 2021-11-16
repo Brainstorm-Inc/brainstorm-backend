@@ -1,17 +1,12 @@
 using System;
-using System.Data;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Brainstorm.Business.Auth.Queries;
 using Brainstorm.Business.Auth.Responses;
+using Brainstorm.Business.Utils;
 using Brainstorm.Entities;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Brainstorm.Business.Auth.Handlers
 {

@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks.Dataflow;
-
 namespace Brainstorm.Entities.User
 {
     public class User : BaseEntity

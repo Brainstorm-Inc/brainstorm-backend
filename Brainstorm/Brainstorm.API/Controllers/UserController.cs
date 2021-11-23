@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Brainstorm.Business.AppVersions.Queries;
 using Brainstorm.Business.Users.Queries;
@@ -18,9 +19,9 @@ namespace Brainstorm.API.Controllers
             _mediator = mediator;
         }
         
-        [HttpGet("user")]
-        public async Task<ActionResult<string>> GetUser() {
-            var res = await _mediator.Send(new GetUserQuery());
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<string>> GetUser(string userId) {
+            var res = await _mediator.Send(new GetUserQuery{UserId = Guid.Parse(userId)});
             return Ok(res);
         }
         

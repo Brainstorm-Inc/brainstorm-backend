@@ -1002,12 +1002,13 @@ components:
               - email
               - id
           examples:
-            GheoUser:
-              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdGlwcm9zdEBob2x5Lnd0ZiIsIkRhdGUiOiIxMi8yLzIwMjEgMTA6Mjk6NTQgQU0iLCJqdGkiOiIzZTY2OWZmOS1jNjBiLTRhNDMtYTcwYS04OGQzOWQwMzhlZWIiLCJleHAiOjE2Mzg1MjczOTQsImlzcyI6ImJyYWluc3Rvcm0taW5jIn0.lsP4_mi2zW3wrUl6Imj_u2L7UCoeBAcREq59o4FPNnY
-              profilePicture: 'https://robohash.org/Gheorghe-Avram.png'
-              firstName: Gheorghe
-              lastName: Avram
-              email: estiprost@holy.wtf
-              id: dc003e9b-c339-491f-a4b3-ed3bf44836bb
+            Gheo:
+              value:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdGlwcm9zdEBob2x5Lnd0ZiIsIkRhdGUiOiIxMi8yLzIwMjEgMTA6Mjk6NTQgQU0iLCJqdGkiOiIzZTY2OWZmOS1jNjBiLTRhNDMtYTcwYS04OGQzOWQwMzhlZWIiLCJleHAiOjE2Mzg1MjczOTQsImlzcyI6ImJyYWluc3Rvcm0taW5jIn0.lsP4_mi2zW3wrUl6Imj_u2L7UCoeBAcREq59o4FPNnY
+                profilePicture: 'https://robohash.org/Gheorghe-Avram.png'
+                firstName: Gheorghe
+                lastName: Avram
+                email: estiprost@holy.wtf
+                id: dc003e9b-c339-491f-a4b3-ed3bf44836bb
 security:
   - simpleauth: []

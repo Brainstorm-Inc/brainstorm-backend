@@ -66,6 +66,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              examples:
+                Gigel:
+                  value:
+                    id: 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    firstName: Gigel
+                    lastName: Anton
+                    email: gigel.anton@gmail.com
+                    profilePic: 'https://robohash.org/gigel.png'
       operationId: get-user
       parameters: []
     put:

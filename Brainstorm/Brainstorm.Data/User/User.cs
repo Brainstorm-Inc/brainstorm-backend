@@ -7,5 +7,7 @@ namespace Brainstorm.Entities.User
         public string Email { get; init; }
         public string Password { get; init; }
         public string ProfilePicture { get; init; }
+
+        public Organization.Organization Org { get; set; }
     }
 }

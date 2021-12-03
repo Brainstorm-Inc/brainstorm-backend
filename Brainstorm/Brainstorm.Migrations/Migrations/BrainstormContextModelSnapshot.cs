@@ -40,10 +40,27 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4541747f-1608-4836-9bc3-ac01cae1c53a"),
+                            Id = new Guid("d8e2d1e9-7399-4cd6-9b68-456ab06223ce"),
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
+                });
+
+            modelBuilder.Entity("Brainstorm.Entities.Organization.Organization", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LogoLink")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organization");
                 });
 
             modelBuilder.Entity("Brainstorm.Entities.User.User", b =>
@@ -70,6 +87,9 @@ namespace Booking.Migrations.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("LastName");
 
+                    b.Property<Guid?>("OrgId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
@@ -84,17 +104,33 @@ namespace Booking.Migrations.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("OrgId");
+
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("01143f01-7b4a-4aad-8e87-6de87e34d9cc"),
+                            Id = new Guid("d5c03d4f-ce30-403b-aa94-982a56c4d196"),
                             Email = "test@test.ro",
                             FirstName = "test",
                             LastName = "test",
                             Password = "password"
                         });
+                });
+
+            modelBuilder.Entity("Brainstorm.Entities.User.User", b =>
+                {
+                    b.HasOne("Brainstorm.Entities.Organization.Organization", "Org")
+                        .WithMany("Users")
+                        .HasForeignKey("OrgId");
+
+                    b.Navigation("Org");
+                });
+
+            modelBuilder.Entity("Brainstorm.Entities.Organization.Organization", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

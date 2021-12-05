@@ -36,7 +36,7 @@ namespace Brainstorm.Business.Organization.Handlers
             {
                 Id = org.Id,
                 Name = org.Name,
-                Users = org.Users as List<User>,
+                Users = org.Users,
                 Logo = org.LogoLink
             };
             return Task.FromResult(res);

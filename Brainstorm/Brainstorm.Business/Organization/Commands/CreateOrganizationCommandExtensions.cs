@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Brainstorm.Entities.User;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Brainstorm.Business.Organization.Commands
 {
@@ -7,13 +8,23 @@ namespace Brainstorm.Business.Organization.Commands
     {
         public static Entities.Organization.Organization ToOrganization(this CreateOrganizationCommand command)
         {
-            return new Entities.Organization.Organization
+            string logo = command.LogoLink;
+            if (logo.IsNullOrEmpty())
+            {
+                logo = $"https://robohash.org/{command.Name}.png";
+            }
+            
+            Entities.Organization.Organization org = new Entities.Organization.Organization
             {
                 Name = command.Name,
                 Users = new List<User>(),
-                LogoLink = command.LogoLink
-                // LogoLink = $"https://robohash.org/{command.Name}.png"
+                // LogoLink = command.LogoLink
+                LogoLink = logo
             };
+            
+            // org.Users.Add(command.CreatorId); // TODO get creator from ID and add it to Users
+
+            return org;
         }
     }
 }

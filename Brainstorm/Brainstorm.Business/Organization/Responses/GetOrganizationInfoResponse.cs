@@ -10,7 +10,7 @@ namespace Brainstorm.Business.Organization.Responses
         
         public string Name { get; set; }
         
-        public List<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
         
         public string Logo { get; set; }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Brainstorm.API.Requests;
+using Brainstorm.Business.Organization.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,5 +26,13 @@ namespace Brainstorm.API.Controllers
             return Ok(res);
         }
 
+        [HttpGet("{orgId}")]
+        public async Task<ActionResult> GetOrganizationInfo(string orgId)
+        {
+            var res = await _mediator.Send(new GetOrganizationInfoQuery{Id = new Guid(orgId)});
+
+            return Ok(res);
+        }
+        
     }
 }

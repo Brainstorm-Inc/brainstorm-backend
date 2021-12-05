@@ -5,8 +5,8 @@ namespace Brainstorm.API.Requests
     public class CreateOrganizationRequest
     {
         public string Name { get; init; }
-
-        public string LogoLink { get; init; }
+        
+        public string Logo { get; init; }
 
     }
 

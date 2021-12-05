@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Organization\Handlers" />
       <Folder Include="Organization\Queries" />
     </ItemGroup>
 

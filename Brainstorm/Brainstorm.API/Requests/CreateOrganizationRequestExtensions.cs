@@ -13,7 +13,7 @@ namespace Brainstorm.API.Requests
             {
                 Name = request.Name,
                 Users = new List<User>(),
-                LogoLink = request.LogoLink,
+                LogoLink = request.Logo,
                 CreatorId =  new Guid(creatorId)
             };
         }

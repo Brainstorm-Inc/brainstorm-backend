@@ -17,9 +17,9 @@ namespace Brainstorm.Entities.Organization
             builder.Property(o => o.Name)
                 .IsRequired();
 
-            builder.Property(o => o.Users)
-                .HasDefaultValue(new List<User.User>());
-
+            // builder.Property(o => o.Users)
+            //     .HasDefaultValue(new List<User.User>());
+            
             builder.Property(o => o.LogoLink)
                 .IsRequired();
 
@@ -28,6 +28,7 @@ namespace Brainstorm.Entities.Organization
             
             builder.HasData(new Organization
             {
+                Id = Guid.NewGuid(),
                 Name = "Test Organization",
                 Users = new List<User.User>(),
                 LogoLink = "https://robohash.org/test-org"

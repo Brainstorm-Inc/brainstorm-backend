@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Brainstorm.API.Requests;
 using MediatR;
@@ -7,17 +8,17 @@ namespace Brainstorm.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class OrganizationController : ControllerBase
+    public class OrgController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public OrganizationController(IMediator mediator)
+        public OrgController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
 
-        [HttpPost("/Org/{creatorId}")]
+        [HttpPost("{creatorId}")]
         public async Task<ActionResult> CreateOrganization([FromBody] CreateOrganizationRequest request,string creatorId)
         {
             var res = await _mediator.Send(request.ToCommand(creatorId));

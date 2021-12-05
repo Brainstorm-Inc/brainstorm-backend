@@ -1,4 +1,5 @@
 using Brainstorm.Entities.AppVersion;
+using Brainstorm.Entities.Organization;
 using Brainstorm.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,13 @@ namespace Brainstorm.Entities {
 
         public DbSet<AppVersion.AppVersion> AppVersions { get; init; }
         public DbSet<User.User> Users { get; init; }
+        
+        public DbSet<Organization.Organization> Organizations { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             builder.ApplyConfiguration(new AppVersionConfig());
             builder.ApplyConfiguration(new UserConfig());
+            builder.ApplyConfiguration(new OrganizationConfig());
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Brainstorm.Entities.User;
 
 namespace Brainstorm.Business.Organization.Responses
 {
@@ -10,7 +9,7 @@ namespace Brainstorm.Business.Organization.Responses
         
         public string Name { get; set; }
         
-        public ICollection<User> Users { get; set; }
+        public ICollection<Guid> UserIds { get; set; }
         
         public string Logo { get; set; }
     }

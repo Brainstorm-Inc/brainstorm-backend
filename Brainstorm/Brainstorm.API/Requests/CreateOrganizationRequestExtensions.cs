@@ -12,7 +12,6 @@ namespace Brainstorm.API.Requests
             return new CreateOrganizationCommand
             {
                 Name = request.Name,
-                Users = new List<User>(),
                 LogoLink = request.Logo,
                 CreatorId =  new Guid(creatorId)
             };

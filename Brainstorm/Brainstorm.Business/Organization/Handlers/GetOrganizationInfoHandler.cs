@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Brainstorm.Business.Auth.Responses;
 using Brainstorm.Business.Organization.Queries;
 using Brainstorm.Business.Organization.Responses;
-using Brainstorm.Business.Utils;
 using Brainstorm.Entities;
-using Brainstorm.Entities.User;
 using MediatR;
 
 namespace Brainstorm.Business.Organization.Handlers
@@ -36,7 +32,7 @@ namespace Brainstorm.Business.Organization.Handlers
             {
                 Id = org.Id,
                 Name = org.Name,
-                Users = org.Users,
+                UserIds = org.Users.Select(u => u.Id).ToList(),
                 Logo = org.LogoLink
             };
             return Task.FromResult(res);

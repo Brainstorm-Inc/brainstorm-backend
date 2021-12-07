@@ -21,7 +21,8 @@ namespace Brainstorm.Business.Organization.Handlers
         
         public Task<CreateOrganizationResponse> Handle(CreateOrganizationCommand request, CancellationToken cancellationToken)
         {
-            if (_ctx.Organizations.FirstOrDefault(u => u.Name == request.Name) is not null)
+            var alreadyExistingOrg = _ctx.Organizations.FirstOrDefault(u => u.Name == request.Name); 
+            if (alreadyExistingOrg is not null)
             {
                 throw new Exception($"Organization with name {request.Name} already exists.");
             }
@@ -31,10 +32,7 @@ namespace Brainstorm.Business.Organization.Handlers
             _ctx.Organizations.Add(org);
             _ctx.SaveChanges();
 
-            var res = new CreateOrganizationResponse
-            {
-                
-            };
+            var res = new CreateOrganizationResponse();
             return Task.FromResult(res);
         }
     }

@@ -40,7 +40,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2433633d-4d57-4928-b2b0-f7d14ef9aa87"),
+                            Id = new Guid("5d0fb2ea-6855-4027-9008-9a802619e7ce"),
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
@@ -69,7 +69,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fa33109a-406d-47e4-9b61-101d25daa2fc"),
+                            Id = new Guid("ca69c6ff-2c15-4e77-ac96-cb04e0b8f258"),
                             LogoLink = "https://robohash.org/test-org",
                             Name = "Test Organization"
                         });
@@ -123,7 +123,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ddf2245e-2b75-4343-ae31-516ab6b1c218"),
+                            Id = new Guid("bed07283-bc1c-4179-bf6f-68bd7d6455e8"),
                             Email = "test@test.ro",
                             FirstName = "test",
                             LastName = "test",

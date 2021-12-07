@@ -20,7 +20,7 @@ namespace Brainstorm.API.Controllers
 
 
         [HttpPost("{creatorId}")]
-        public async Task<ActionResult> CreateOrganization([FromBody] CreateOrganizationRequest request,string creatorId)
+        public async Task<ActionResult> CreateOrganization([FromBody] CreateOrganizationRequest request,[FromRoute] string creatorId)
         {
             var res = await _mediator.Send(request.ToCommand(creatorId));
             return Ok(res);

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Booking.Migrations.Migrations
 {
-    public partial class AddedOrgGetInfo : Migration
+    public partial class AddedOrgInfoGet : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,17 +25,17 @@ namespace Booking.Migrations.Migrations
             migrationBuilder.InsertData(
                 table: "AppVersions",
                 columns: new[] { "Id", "MajorVersion", "MinorVersion" },
-                values: new object[] { new Guid("2433633d-4d57-4928-b2b0-f7d14ef9aa87"), 0, 1 });
+                values: new object[] { new Guid("5d0fb2ea-6855-4027-9008-9a802619e7ce"), 0, 1 });
 
             migrationBuilder.InsertData(
                 table: "Organizations",
                 columns: new[] { "Id", "LogoLink", "Name" },
-                values: new object[] { new Guid("fa33109a-406d-47e4-9b61-101d25daa2fc"), "https://robohash.org/test-org", "Test Organization" });
+                values: new object[] { new Guid("ca69c6ff-2c15-4e77-ac96-cb04e0b8f258"), "https://robohash.org/test-org", "Test Organization" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "OrgId", "Password" },
-                values: new object[] { new Guid("ddf2245e-2b75-4343-ae31-516ab6b1c218"), "test@test.ro", "test", "test", null, "password" });
+                values: new object[] { new Guid("bed07283-bc1c-4179-bf6f-68bd7d6455e8"), "test@test.ro", "test", "test", null, "password" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -43,17 +43,17 @@ namespace Booking.Migrations.Migrations
             migrationBuilder.DeleteData(
                 table: "AppVersions",
                 keyColumn: "Id",
-                keyValue: new Guid("2433633d-4d57-4928-b2b0-f7d14ef9aa87"));
+                keyValue: new Guid("5d0fb2ea-6855-4027-9008-9a802619e7ce"));
 
             migrationBuilder.DeleteData(
                 table: "Organizations",
                 keyColumn: "Id",
-                keyValue: new Guid("fa33109a-406d-47e4-9b61-101d25daa2fc"));
+                keyValue: new Guid("ca69c6ff-2c15-4e77-ac96-cb04e0b8f258"));
 
             migrationBuilder.DeleteData(
                 table: "Users",
                 keyColumn: "Id",
-                keyValue: new Guid("ddf2245e-2b75-4343-ae31-516ab6b1c218"));
+                keyValue: new Guid("bed07283-bc1c-4179-bf6f-68bd7d6455e8"));
 
             migrationBuilder.InsertData(
                 table: "AppVersions",

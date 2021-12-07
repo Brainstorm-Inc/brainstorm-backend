@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Brainstorm.Business.Organization.Queries;
 using Brainstorm.Business.Organization.Responses;
 using Brainstorm.Entities;
+using Brainstorm.Entities.User;
 using MediatR;
 
 namespace Brainstorm.Business.Organization.Handlers
@@ -28,11 +30,21 @@ namespace Brainstorm.Business.Organization.Handlers
                 throw new Exception($"Organization with ID {request.Id} does not exist");
             }
 
+            var userList = org.Users;
+            var userIdList = new List<Guid>();
+
+
+            if (userList is not null)
+            {
+                userIdList = userList.Select(u => u.Id).ToList();
+            }
+            
+
             var res = new GetOrganizationInfoResponse
             {
                 Id = org.Id,
                 Name = org.Name,
-                UserIds = org.Users.Select(u => u.Id).ToList(),
+                UserIds = userIdList,
                 Logo = org.LogoLink
             };
             return Task.FromResult(res);

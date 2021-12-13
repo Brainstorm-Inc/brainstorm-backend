@@ -74,6 +74,13 @@ paths:
                     lastName: Anton
                     email: gigel.anton@gmail.com
                     profilePic: 'https://robohash.org/gigel.png'
+                Maricica:
+                  value:
+                    id: 4f740754-574b-11ec-bf63-0242ac130002
+                    firstName: Maricica
+                    lastName: Pop
+                    email: maricica.pop@gmail.com
+                    profilePic: 'https://robohash.org/maricica.png'
       operationId: get-user
       parameters: []
     put:
@@ -99,6 +106,23 @@ paths:
         - User
     parameters:
       - $ref: '#/components/parameters/userId'
+  '/Org/{orgId}/users':
+    parameters:
+      - $ref: '#/components/parameters/orgId'
+    get:
+      summary: Get Organization Members
+      tags:
+        - Organization
+      responses: {}
+      operationId: get-org-orgId-users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+      description: ''
   /Org:
     post:
       summary: Create an Organization
@@ -153,23 +177,6 @@ paths:
         - Organization
     parameters:
       - $ref: '#/components/parameters/orgId'
-  '/Org/{orgId}/users':
-    parameters:
-      - $ref: '#/components/parameters/orgId'
-    get:
-      summary: Get Organization Members
-      tags:
-        - Organization
-      responses: {}
-      operationId: get-org-orgId-users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
-      description: ''
   '/Org/{orgId}/user/{userId}':
     parameters:
       - $ref: '#/components/parameters/orgId'
@@ -318,6 +325,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    type: simple
+                    title: string
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: a3ae4c17-e298-431e-a906-2e70834aac9a
+                    activeUsers:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    currentIteration: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                    iterations:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    creationDate: '2019-08-24T14:15:22Z'
       requestBody:
         $ref: '#/components/requestBodies/Topic'
       tags:
@@ -334,6 +355,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                Simple:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    type: simple
+                    title: Simple Topic
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                    activeUsers:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    iterations:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    creationDate: '2019-08-24T14:15:22Z'
+                Complex:
+                  value:
+                    id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                    type: complex
+                    title: Complex Topic
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
+                    activeUsers:
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    iterations:
+                      - 4f740628-574b-11ec-bf63-0242ac130002
+                    creationDate: '2019-08-24T14:15:22Z'
       operationId: get-Topic-topicId
     parameters:
       - $ref: '#/components/parameters/topicId'
@@ -347,14 +402,102 @@ paths:
     get:
       summary: Get Detailed Iterations Info
       tags: []
-      responses: {}
       operationId: get-Topic-topicId-iterations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Iteration'
+              examples:
+                TopicIterations:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      position: 3
+                      open: true
+                      goal: string
+                      description: I need a good description!!
+                      files:
+                        - string
+                      comments:
+                        lastActiveUsers:
+                          - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        commentsAmount: 0
+                        lastCommentDate: '2019-08-24T14:15:22Z'
+                      deadline: '2019-08-24T14:15:22Z'
+                      timeline:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          description: string
+                          author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                          creationDate: '2019-08-24T14:15:22Z'
+                          files:
+                            - string
+                          comments:
+                            lastActiveUsers:
+                              - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                            commentsAmount: 0
+                            lastCommentDate: '2019-08-24T14:15:22Z'
+                          rating:
+                            '1': 0
+                            '2': 0
+                            '3': 0
+                            '4': 0
+                            '5': 0
+                            yourVote:
+                              - 1
+                            average: 0
+      description: ''
     post:
       summary: Create an Iteration
       operationId: post-Topic-topicId-iterations
       responses:
         '200':
           description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Iteration'
+            examples:
+              example-1:
+                value:
+                  id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                  position: 3
+                  open: true
+                  goal: string
+                  description: string
+                  files:
+                    - string
+                  comments:
+                    lastActiveUsers:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    commentsAmount: 0
+                    lastCommentDate: '2019-08-24T14:15:22Z'
+                  deadline: '2019-08-24T14:15:22Z'
+                  timeline:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      description: string
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      creationDate: '2019-08-24T14:15:22Z'
+                      files:
+                        - string
+                      comments:
+                        lastActiveUsers:
+                          - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        commentsAmount: 0
+                        lastCommentDate: '2019-08-24T14:15:22Z'
+                      rating:
+                        '1': 0
+                        '2': 0
+                        '3': 0
+                        '4': 0
+                        '5': 0
+                        yourVote:
+                          - 1
+                        average: 0
   '/Iteration/{iterationId}':
     parameters:
       - schema:
@@ -365,7 +508,181 @@ paths:
     get:
       summary: Get info about an Iteration
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iteration'
+              examples:
+                TopicIteration:
+                  value:
+                    id: 4f740628-574b-11ec-bf63-0242ac130002
+                    position: 3
+                    open: true
+                    goal: Goal
+                    description: Idea description
+                    files:
+                      - string
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    deadline: '2019-08-29T14:15:22Z'
+                    timeline:
+                      - id: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                        description: Lorem ipsum first
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        creationDate: '2019-08-24T14:15:22Z'
+                        files:
+                          - string
+                        comments:
+                          lastActiveUsers:
+                            - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          commentsAmount: 0
+                          lastCommentDate: '2019-08-24T14:15:22Z'
+                        rating:
+                          '1': 0
+                          '2': 0
+                          '3': 0
+                          '4': 0
+                          '5': 0
+                          yourVote:
+                            - 1
+                          average: 0
+            application/xml:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  position:
+                    type: number
+                  open:
+                    type: boolean
+                  goal:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  files:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  comments:
+                    type: object
+                    properties:
+                      lastActiveUsers:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      commentsAmount:
+                        type: number
+                      lastCommentDate:
+                        type: string
+                        minLength: 1
+                    required:
+                      - lastActiveUsers
+                      - commentsAmount
+                      - lastCommentDate
+                  deadline:
+                    type: string
+                    minLength: 1
+                  timeline:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - id
+                        - description
+                        - author
+                        - creationDate
+                      properties:
+                        id:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        author:
+                          type: string
+                          minLength: 1
+                        creationDate:
+                          type: string
+                          minLength: 1
+                        files:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                        comments:
+                          type: object
+                          properties:
+                            lastActiveUsers:
+                              type: array
+                              items:
+                                required: []
+                                properties: {}
+                          required:
+                            - lastActiveUsers
+                        rating:
+                          type: object
+                          properties:
+                            yourVote:
+                              type: array
+                              items:
+                                required: []
+                                properties: {}
+                          required:
+                            - yourVote
+                required:
+                  - id
+                  - position
+                  - open
+                  - goal
+                  - description
+                  - files
+                  - comments
+                  - deadline
+                  - timeline
+                x-examples:
+                  example-1:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    position: 3
+                    open: true
+                    goal: string
+                    description: string
+                    files:
+                      - string
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    deadline: '2019-08-24T14:15:22Z'
+                    timeline:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        description: string
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        creationDate: '2019-08-24T14:15:22Z'
+                        files:
+                          - null
+                        comments:
+                          lastActiveUsers: []
+                        rating:
+                          yourVote: []
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
       operationId: get-Iteration-iterationId
     put:
       summary: Update an Iteration
@@ -421,6 +738,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Proposal'
+              examples:
+                SimpleTopicProposal:
+                  value:
+                    id: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    creationDate: '2019-08-24T14:15:22Z'
+                    files:
+                      - 'https://source.unsplash.com/random/800x600'
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    rating:
+                      '1': 0
+                      '2': 0
+                      '3': 0
+                      '4': 0
+                      '5': 0
+                      yourVote:
+                        - 1
+                      average: 0
+                ComplexTopicProposal:
+                  value:
+                    id: 4f740326-574b-11ec-bf63-0242ac130002
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget commodo leo, in tristique elit. Nulla eleifend lacus a tristique varius. Sed ligula enim, tristique eget posuere quis, blandit eget ex. Nullam a sapien et velit dictum dapibus accumsan ut ligula. Nullam euismod nisl neque, ut euismod risus accumsan eu. Aliquam in quam eleifend, feugiat elit nec, sagittis nibh. Etiam quis tincidunt nulla, at tempus felis.'
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    creationDate: '2019-08-24T14:15:22Z'
+                    files:
+                      - 'https://source.unsplash.com/random/800x600'
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    rating:
+                      '1': 0
+                      '2': 0
+                      '3': 0
+                      '4': 0
+                      '5': 0
+                      yourVote:
+                        - 1
+                      average: 0
       operationId: get-Proposal-proposalId
     put:
       summary: Update Proposal

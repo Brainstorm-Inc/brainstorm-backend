@@ -73,14 +73,14 @@ paths:
                     firstName: Gigel
                     lastName: Anton
                     email: gigel.anton@gmail.com
-                    profilePic: 'https://robohash.org/gigel.png'
+                    profilePic: 'https://i.pravatar.cc/150?u=gigel.png'
                 Maricica:
                   value:
                     id: 4f740754-574b-11ec-bf63-0242ac130002
                     firstName: Maricica
                     lastName: Pop
                     email: maricica.pop@gmail.com
-                    profilePic: 'https://robohash.org/maricica.png'
+                    profilePic: 'https://i.pravatar.cc/150?u=maricica.png'
       operationId: get-user
       parameters: []
     put:
@@ -988,6 +988,7 @@ components:
           enum:
             - simple
             - complex
+          readOnly: true
         title:
           type: string
         author:

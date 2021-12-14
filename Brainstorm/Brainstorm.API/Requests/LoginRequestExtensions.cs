@@ -1,16 +1,15 @@
 using Brainstorm.Business.Auth.Queries;
 
-namespace Brainstorm.API.Requests
+namespace Brainstorm.API.Requests;
+
+public static class LoginRequestExtensions
 {
-    public static class LoginRequestExtensions
+    public static LoginQuery ToQuery(this LoginRequest request)
     {
-        public static LoginQuery ToQuery(this LoginRequest request)
+        return new LoginQuery
         {
-            return new LoginQuery
-            {
-                Email = request.Email,
-                Password = request.Password
-            };
-        }
+            Email = request.Email,
+            Password = request.Password
+        };
     }
 }

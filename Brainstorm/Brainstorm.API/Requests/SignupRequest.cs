@@ -1,25 +1,24 @@
 ﻿using FluentValidation;
 
-namespace Brainstorm.API.Requests
-{
-    public class SignupRequest
-    {
-        public string FirstName { get; init; }
-        public string LastName { get; init; }
-        public string Email { get; init; }
-        public string Password { get; init; }
-    }
+namespace Brainstorm.API.Requests;
 
-    public class SignupRequestValidator : AbstractValidator<SignupRequest>
+public class SignupRequest
+{
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string Email { get; init; }
+    public string Password { get; init; }
+}
+
+public class SignupRequestValidator : AbstractValidator<SignupRequest>
+{
+    public SignupRequestValidator()
     {
-        public SignupRequestValidator()
-        {
-            RuleFor(r => r.FirstName).NotEmpty();
-            RuleFor(r => r.LastName).NotEmpty();
-            RuleFor(r => r.Email).NotEmpty()
-                .EmailAddress().WithMessage("Wrong email format");
-            RuleFor(r => r.Password).NotEmpty()
-                .MinimumLength(6).WithMessage("Password is too short.");
-        }
+        RuleFor(r => r.FirstName).NotEmpty();
+        RuleFor(r => r.LastName).NotEmpty();
+        RuleFor(r => r.Email).NotEmpty()
+            .EmailAddress().WithMessage("Wrong email format");
+        RuleFor(r => r.Password).NotEmpty()
+            .MinimumLength(6).WithMessage("Password is too short.");
     }
 }

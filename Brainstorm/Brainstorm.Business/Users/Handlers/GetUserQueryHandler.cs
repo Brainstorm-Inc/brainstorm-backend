@@ -10,27 +10,28 @@ using Brainstorm.Business.Users.Responses;
 using Brainstorm.Entities;
 using MediatR;
 
-namespace Brainstorm.Business.Users.Handlers
+namespace Brainstorm.Business.Users.Handlers;
+
+public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserCode>
 {
-    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDetails>
+    private readonly BrainstormContext _ctx;
+
+    public GetUserQueryHandler(BrainstormContext ctx)
     {
-        private readonly BrainstormContext _ctx;
+        _ctx = ctx;
+    }
 
-        public GetUserQueryHandler(BrainstormContext ctx)
+    public Task<UserCode> Handle(GetUserQuery request, CancellationToken cancellationToken)
+    {
+        if (!_ctx.Users.Any())
         {
-            _ctx = ctx;
+            throw new Exception("No user found.");
         }
 
-        public Task<UserDetails> Handle(GetUserQuery request, CancellationToken cancellationToken)
-        {
-            if (!_ctx.Users.Any())
-            {
-                throw new Exception("No user found.");
-            }
+        var code = _ctx.Users.OrderByDescending(v => v.Id)
+            .FirstOrDefault()
+            .ToUserCode();
 
-            var code = _ctx.Users.FirstOrDefault(u => u.Id == request.UserId).ToUserCode();
-
-            return Task.FromResult(code);
-        }
+        return Task.FromResult(code);
     }
 }

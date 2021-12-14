@@ -23,4 +23,12 @@ public class OrgController : ControllerBase
 
         return Ok(res);
     }
+
+    [HttpGet("{orgId}/user/{userId}")]
+    public async Task<ActionResult> CheckUserInOrg([FromRoute] string orgId, [FromRoute] string userId)
+    {
+        await _mediator.Send(new CheckUserInOrgQuery {OrgId = orgId, UserId = userId});
+
+        return NoContent();
+    }
 }

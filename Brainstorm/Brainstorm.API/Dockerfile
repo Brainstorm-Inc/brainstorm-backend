@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 COPY ./Brainstorm.sln .
@@ -20,7 +20,7 @@ COPY Brainstorm.Migrations ./Brainstorm.Migrations
 WORKDIR /app
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out/Brainstorm.API.dll ./Brainstorm.API.dll
 ENTRYPOINT ["dotnet", "./Brainstorm.API.dll"]

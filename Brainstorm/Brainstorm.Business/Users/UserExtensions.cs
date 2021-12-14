@@ -6,7 +6,7 @@ namespace Brainstorm.Business.Users;
 
 public static class UserExtensions
 {
-    public static UserDetails ToUserCode(this User user)
+    public static UserDetails ToUserDetails(this User user)
     {
         return new UserDetails
         {

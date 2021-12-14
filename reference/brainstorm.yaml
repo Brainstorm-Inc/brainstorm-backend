@@ -188,6 +188,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '404':
+          description: Not Found
       operationId: get-org-rgId-user-userId
     post:
       summary: Add a user to an Organization

@@ -28,9 +28,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserCode>
             throw new Exception("No user found.");
         }
 
-        var code = _ctx.Users.OrderByDescending(v => v.Id)
-            .FirstOrDefault()
-            .ToUserCode();
+        var code = _ctx.Users.FirstOrDefault(u => u.Id == request.UserId).ToUserCode()
 
         return Task.FromResult(code);
     }

@@ -12,7 +12,7 @@ using MediatR;
 
 namespace Brainstorm.Business.Users.Handlers
 {
-    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserCode>
+    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDetails>
     {
         private readonly BrainstormContext _ctx;
 
@@ -21,7 +21,7 @@ namespace Brainstorm.Business.Users.Handlers
             _ctx = ctx;
         }
 
-        public Task<UserCode> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        public Task<UserDetails> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             if (!_ctx.Users.Any())
             {

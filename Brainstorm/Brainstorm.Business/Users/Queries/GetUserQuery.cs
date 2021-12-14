@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Brainstorm.Business.Users.Queries
 {
-    public class GetUserQuery : IRequest<UserCode>
+    public class GetUserQuery : IRequest<UserDetails>
     {
         public Guid UserId { get; init; }
     }

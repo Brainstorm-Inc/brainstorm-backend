@@ -1,6 +1,6 @@
 namespace Brainstorm.Business.Users.Responses
 {
-    public class UserCode
+    public class UserDetails
     {
         public string Id { get; init; }
         public string FirstName { get; init; }

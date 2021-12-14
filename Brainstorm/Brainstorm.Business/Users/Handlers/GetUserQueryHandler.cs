@@ -12,7 +12,7 @@ using MediatR;
 
 namespace Brainstorm.Business.Users.Handlers;
 
-public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDetails>
+public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserCode>
 {
     private readonly BrainstormContext _ctx;
 

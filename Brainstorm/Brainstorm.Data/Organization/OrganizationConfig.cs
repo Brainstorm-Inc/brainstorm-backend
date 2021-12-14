@@ -28,6 +28,7 @@ public class OrganizationConfig : IEntityTypeConfiguration<Organization>
 
         builder.HasData(new Organization
         {
+            Id=Guid.NewGuid(),
             Name = "Test Organization",
             Users = new List<User.User>(),
             LogoLink = "https://robohash.org/test-org"

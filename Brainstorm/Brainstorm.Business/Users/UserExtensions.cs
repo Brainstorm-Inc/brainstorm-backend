@@ -6,9 +6,9 @@ namespace Brainstorm.Business.Users
 {
     public static class UserExtensions
     {
-        public static UserCode ToUserCode(this User user)
+        public static UserDetails ToUserCode(this User user)
         {
-            return new UserCode
+            return new UserDetails
             {
                 Id = user.Id.ToString(),
                 Email = user.Email,

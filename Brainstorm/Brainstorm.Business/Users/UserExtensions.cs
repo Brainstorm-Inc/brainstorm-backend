@@ -6,10 +6,15 @@ namespace Brainstorm.Business.Users;
 
 public static class UserExtensions
 {
-    public static UserCode ToUserCode(this User user)
+    public static UserDetails ToUserDetails(this User user)
     {
-        return new UserCode
+        return new UserDetails
         {
+            Id = user.Id.ToString(),
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            ProfilePicture = user.ProfilePicture
         };
     }
 }

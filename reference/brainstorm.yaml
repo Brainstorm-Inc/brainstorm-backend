@@ -102,6 +102,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+            examples:
+              User:
+                value:
+                  id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                  firstName: Anca
+                  lastName: Pop
+                  email: anca@gmail.com
+                  profilePic: 'https://robohash.org/anca.png'
       tags:
         - User
     parameters:
@@ -134,6 +142,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organization'
+              examples:
+                NewOrg:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: NewOrg
+                    users:
+                      - c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                    projects:
+                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    logo: 'https://robohash.org/logo.png'
       requestBody:
         $ref: '#/components/requestBodies/Organization'
       tags:
@@ -149,6 +167,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organization'
+              examples:
+                SchoolProject:
+                  value:
+                    id: fbbb7a98-5cc7-11ec-bf63-0242ac130002
+                    name: School Project
+                    users:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                    projects:
+                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    logo: 'https://robohash.org/schoolProject.png'
       operationId: get-org
       tags:
         - Organization
@@ -162,6 +191,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organization'
+              examples:
+                UpdateOrgInfo:
+                  value:
+                    id: fbbb79c6-5cc7-11ec-bf63-0242ac130002
+                    name: Another Organization
+                    users:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                    projects:
+                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    logo: 'https://robohash.org/other.png'
       requestBody:
         $ref: '#/components/requestBodies/Organization'
       tags:
@@ -249,6 +289,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectId'
+              examples:
+                OrgProjects:
+                  value:
+                    - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    - ''
       operationId: get-org-orgId-projects
   '/Org/{orgId}/project/{projectId}':
     parameters:

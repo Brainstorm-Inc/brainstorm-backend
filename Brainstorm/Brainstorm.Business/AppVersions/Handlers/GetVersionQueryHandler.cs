@@ -7,29 +7,28 @@ using Brainstorm.Business.AppVersions.Responses;
 using Brainstorm.Entities;
 using MediatR;
 
-namespace Brainstorm.Business.AppVersions.Handlers
+namespace Brainstorm.Business.AppVersions.Handlers;
+
+public class GetVersionQueryHandler : IRequestHandler<GetVersionQuery, AppVersionCode>
 {
-    public class GetVersionQueryHandler : IRequestHandler<GetVersionQuery, AppVersionCode>
+    private readonly BrainstormContext _ctx;
+
+    public GetVersionQueryHandler(BrainstormContext ctx)
     {
-        private readonly BrainstormContext _ctx;
+        _ctx = ctx;
+    }
 
-        public GetVersionQueryHandler(BrainstormContext ctx)
+    public Task<AppVersionCode> Handle(GetVersionQuery request, CancellationToken cancellationToken)
+    {
+        if (!_ctx.AppVersions.Any())
         {
-            _ctx = ctx;
+            throw new Exception("No version found.");
         }
 
-        public Task<AppVersionCode> Handle(GetVersionQuery request, CancellationToken cancellationToken)
-        {
-            if (!_ctx.AppVersions.Any())
-            {
-                throw new Exception("No version found.");
-            }
+        var code = _ctx.AppVersions.OrderByDescending(v => v.Id)
+            .FirstOrDefault()
+            .ToVersionCode();
 
-            var code = _ctx.AppVersions.OrderByDescending(v => v.Id)
-                .FirstOrDefault()
-                .ToVersionCode();
-
-            return Task.FromResult(code);
-        }
+        return Task.FromResult(code);
     }
 }

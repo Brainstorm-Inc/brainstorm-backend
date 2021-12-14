@@ -277,6 +277,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+              examples:
+                FirstGetAllInDetail:
+                  value:
+                    id: 2ef92afa-5cd6-11ec-bf63-0242ac130002
+                    name: FirstExample
+                    topics:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        type: simple
+                        title: Simple Topic
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                        activeUsers:
+                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
       operationId: get-org-orgId-project-projectId
     put:
       summary: Update Project Info
@@ -316,6 +333,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TopicSummary'
+              examples:
+                FirstGet:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      type: simple
+                      title: Simple Topic
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
       operationId: get-Project-projectId-topics
       description: ''
   '/Project/{projectId}/topic':
@@ -332,16 +363,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Topic'
               examples:
-                example-1:
+                First:
                   value:
                     id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
                     type: simple
-                    title: string
+                    title: Simple Topic
                     author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
-                    highlightedProposal: a3ae4c17-e298-431e-a906-2e70834aac9a
+                    highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
                     activeUsers:
-                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
-                    currentIteration: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
                     iterations:
                       - 497f6eca-6276-4993-bfeb-53cbbbba6f08
                     creationDate: '2019-08-24T14:15:22Z'

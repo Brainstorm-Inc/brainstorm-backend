@@ -114,6 +114,23 @@ paths:
         - User
     parameters:
       - $ref: '#/components/parameters/userId'
+  '/User/{userId}/orgs':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Organizations a User is In
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrgId'
+      operationId: get-User-userId-orgs
+      description: ''
   '/Org/{orgId}/users':
     parameters:
       - $ref: '#/components/parameters/orgId'

@@ -177,7 +177,7 @@ paths:
                       - 4f740754-574b-11ec-bf63-0242ac130002
                     projects:
                       - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
-                    logo: 'https://robohash.org/schoolProject.png'
+                    logo: 'https://logo.clearbit.com/schoola.com'
       operationId: get-org
       tags:
         - Organization
@@ -292,8 +292,7 @@ paths:
               examples:
                 OrgProjects:
                   value:
-                    - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
-                    - ''
+                    - 2ef92afa-5cd6-11ec-bf63-0242ac130002
       operationId: get-org-orgId-projects
   '/Org/{orgId}/project/{projectId}':
     parameters:
@@ -321,24 +320,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectSummary'
               examples:
                 FirstGetAllInDetail:
                   value:
                     id: 2ef92afa-5cd6-11ec-bf63-0242ac130002
                     name: FirstExample
-                    topics:
-                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-                        type: simple
-                        title: Simple Topic
-                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
-                        highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
-                        activeUsers:
-                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
-                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
-                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
-                          - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
-                        currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
       operationId: get-org-orgId-project-projectId
     put:
       summary: Update Project Info
@@ -1047,16 +1034,17 @@ components:
           $ref: '#/components/schemas/ProjectId'
         name:
           type: string
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopicSummary'
-          readOnly: true
     Project:
       title: Project
       allOf:
         - $ref: '#/components/schemas/ProjectSummary'
         - type: object
+          properties:
+            topics:
+              type: array
+              items:
+                $ref: '#/components/schemas/TopicSummary'
+              readOnly: true
     TopicId:
       type: string
       title: TopicId

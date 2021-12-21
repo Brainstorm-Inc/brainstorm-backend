@@ -289,7 +289,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/ProjectSummary'
       tags:
         - Project
         - Organization
@@ -549,6 +549,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iteration'
       requestBody:
         content:
           application/json:
@@ -1081,6 +1085,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserId'
+          readOnly: true
         currentIteration:
           $ref: '#/components/schemas/IterationId'
     Topic:
@@ -1093,9 +1098,11 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/IterationId'
+              readOnly: true
             creationDate:
               type: string
               format: date-time
+              readOnly: true
     IterationId:
       type: string
       title: IterationId
@@ -1110,8 +1117,11 @@ components:
         position:
           type: number
           example: 3
+          readOnly: true
         open:
           type: boolean
+          default: true
+          readOnly: true
         goal:
           type: string
         description:
@@ -1170,8 +1180,8 @@ components:
             - $ref: '#/components/schemas/ProposalId'
             - type: 'null'
     CommentsSummary:
-      title: CommentsSummary
       type: object
+      title: CommentsSummary
       properties:
         lastActiveUsers:
           type: array
@@ -1184,14 +1194,16 @@ components:
         lastCommentDate:
           type: string
           format: date-time
+      readOnly: true
     Timeline:
+      type: array
       title: Timeline
       description: ''
-      type: array
       items:
         anyOf:
           - $ref: '#/components/schemas/Proposal'
           - $ref: '#/components/schemas/Event'
+      readOnly: true
     ProposalId:
       type: string
       title: ProposalId

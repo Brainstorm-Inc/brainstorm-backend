@@ -818,6 +818,15 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
   '/Proposal/{proposalId}':
     parameters:
       - schema:
@@ -907,6 +916,18 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        description: |-
+          `replyTo` should be id of comment you are replying to, if you are replying to one  
+          `proposal` shouldn't be in the object but i don't know how to make the field readonly
   '/Proposal/{proposalId}/comments':
     parameters:
       - schema:
@@ -917,7 +938,13 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentSection'
       operationId: get-Proposal-proposalId-comments
   '/Proposal/{proposalId}/comment/{commentId}':
     parameters:
@@ -932,9 +959,15 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get Comment Info
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
       operationId: get-Proposal-proposalId-comment-commentId
     patch:
       summary: Add Third-Party additions to Comments
@@ -959,7 +992,13 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
       operationId: get-Event-eventId
 components:
   schemas:
@@ -1088,6 +1127,8 @@ components:
           readOnly: true
         currentIteration:
           $ref: '#/components/schemas/IterationId'
+      required:
+        - title
     Topic:
       title: Topic
       allOf:
@@ -1137,6 +1178,9 @@ components:
           format: date-time
         timeline:
           $ref: '#/components/schemas/Timeline'
+      required:
+        - goal
+        - description
     CommentSection:
       title: CommentSection
       type: object
@@ -1169,6 +1213,7 @@ components:
         creationDate:
           type: string
           format: date-time
+          readOnly: true
         rating:
           $ref: '#/components/schemas/Rating'
         replyTo:
@@ -1179,6 +1224,8 @@ components:
           oneOf:
             - $ref: '#/components/schemas/ProposalId'
             - type: 'null'
+      required:
+        - content
     CommentsSummary:
       type: object
       title: CommentsSummary
@@ -1222,6 +1269,7 @@ components:
         creationDate:
           type: string
           format: date-time
+          readOnly: true
         files:
           type: array
           items:
@@ -1230,6 +1278,8 @@ components:
           $ref: '#/components/schemas/CommentsSummary'
         rating:
           $ref: '#/components/schemas/Rating'
+      required:
+        - description
     EventId:
       type: string
       title: EventId
@@ -1306,8 +1356,8 @@ components:
       description: ''
       x-internal: false
     Rating:
-      title: Rating
       type: object
+      title: Rating
       properties:
         '1':
           type: number
@@ -1340,6 +1390,7 @@ components:
           maximum: 5
           format: float
           readOnly: true
+      readOnly: true
   securitySchemes:
     simpleauth:
       type: oauth2

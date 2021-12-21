@@ -129,6 +129,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OrgId'
+              examples:
+                SampleList:
+                  value:
+                    - fbbb7a98-5cc7-11ec-bf63-0242ac130002
       operationId: get-User-userId-orgs
       description: ''
   '/Org/{orgId}/users':
@@ -1019,25 +1023,13 @@ components:
           $ref: '#/components/schemas/OrgId'
         name:
           type: string
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-        projects:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectId'
         logo:
           oneOf:
             - type: string
-              properties: {}
-            - properties: {}
-              type: 'null'
+            - type: 'null'
       required:
         - id
         - name
-        - users
-        - projects
     ProjectId:
       type: string
       title: ProjectId

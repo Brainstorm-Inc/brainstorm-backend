@@ -133,6 +133,7 @@ paths:
                 SampleList:
                   value:
                     - fbbb7a98-5cc7-11ec-bf63-0242ac130002
+                    - 497f6eca-6276-4993-bfeb-53cbbbba6f08
       operationId: get-User-userId-orgs
       description: ''
   '/Org/{orgId}/users':
@@ -193,12 +194,12 @@ paths:
                   value:
                     id: fbbb7a98-5cc7-11ec-bf63-0242ac130002
                     name: School Project
-                    users:
-                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
-                      - 4f740754-574b-11ec-bf63-0242ac130002
-                    projects:
-                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
                     logo: 'https://logo.clearbit.com/schoola.com'
+                WorkTeam:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: WorkTeam
+                    logo: 'https://logo.clearbit.com/fullstory.com'
       operationId: get-org
       tags:
         - Organization
@@ -436,6 +437,24 @@ paths:
         $ref: '#/components/requestBodies/Topic'
       tags:
         - Project
+  '/Project/{projectId}/org':
+    parameters:
+      - $ref: '#/components/parameters/projectId'
+    get:
+      summary: Get Parent Organization of Project
+      tags:
+        - Project
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parent:
+                    $ref: '#/components/schemas/OrgId'
+      operationId: get-Project-projectId-org
   '/Topic/{topicId}':
     get:
       summary: Get Topic Info
@@ -483,6 +502,7 @@ paths:
                       - 4f740628-574b-11ec-bf63-0242ac130002
                     creationDate: '2019-08-24T14:15:22Z'
       operationId: get-Topic-topicId
+      description: ''
     parameters:
       - $ref: '#/components/parameters/topicId'
   '/Topic/{topicId}/iterations':
@@ -595,6 +615,24 @@ paths:
                         yourVote:
                           - 1
                         average: 0
+  '/Topic/{topicId}/project':
+    parameters:
+      - $ref: '#/components/parameters/topicId'
+    get:
+      summary: Get Parent Project of a Topic
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parent:
+                    $ref: '#/components/schemas/ProjectId'
+      operationId: get-Topic-topicId-project
+      tags:
+        - Topic
   '/Iteration/{iterationId}':
     parameters:
       - schema:

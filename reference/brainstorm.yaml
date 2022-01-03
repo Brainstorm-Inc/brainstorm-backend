@@ -1544,7 +1544,9 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Topic'
+            allOf:
+              - $ref: '#/components/schemas/TopicSummary'
+              - $ref: '#/components/schemas/Iteration'
   parameters:
     orgId:
       name: orgId

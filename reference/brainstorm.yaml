@@ -315,6 +315,7 @@ paths:
                 OrgProjects:
                   value:
                     - 2ef92afa-5cd6-11ec-bf63-0242ac130002
+                    - 497f6eca-6276-4993-bfeb-53cbbbba6f08
       operationId: get-org-orgId-projects
   '/Org/{orgId}/project/{projectId}':
     parameters:
@@ -348,6 +349,10 @@ paths:
                   value:
                     id: 2ef92afa-5cd6-11ec-bf63-0242ac130002
                     name: FirstExample
+                SecondExample:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: Second Example
       operationId: get-org-orgId-project-projectId
     put:
       summary: Update Project Info
@@ -404,6 +409,31 @@ paths:
                     - id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
                       type: complex
                       title: Complex Topic
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                SecondProject:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      type: simple
+                      title: Simple Topic 2
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    - id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                      type: complex
+                      title: Complex Topic 2
                       author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
                       highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
                       activeUsers:
@@ -530,7 +560,8 @@ paths:
         required: true
     get:
       summary: Get Detailed Iterations Info
-      tags: []
+      tags:
+        - Topic
       operationId: get-Topic-topicId-iterations
       responses:
         '200':
@@ -662,7 +693,8 @@ paths:
         required: true
     get:
       summary: Get info about an Iteration
-      tags: []
+      tags:
+        - Topic
       responses:
         '200':
           description: OK
@@ -860,7 +892,8 @@ paths:
         required: true
     get:
       summary: Get Timeline of an Interation
-      tags: []
+      tags:
+        - Topic
       responses: {}
       operationId: get-Iteration-iterationId-timeline
   '/Iteration/{iterationId}/proposal':
@@ -885,6 +918,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Proposal'
+      tags:
+        - Topic
   '/Proposal/{proposalId}':
     parameters:
       - schema:
@@ -894,7 +929,8 @@ paths:
         required: true
     get:
       summary: Get Proposal
-      tags: []
+      tags:
+        - Topic
       responses:
         '200':
           description: OK

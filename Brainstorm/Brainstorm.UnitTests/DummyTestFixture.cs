@@ -1,14 +1,13 @@
 using NUnit.Framework;
 
-namespace Brainstorm.Testing
+namespace Brainstorm.Testing;
+
+[TestFixture]
+public class DummyTestFixture
 {
-    [TestFixture]
-    public class DummyTestFixture
+    [Test]
+    public void Pass()
     {
-        [Test]
-        public void Pass()
-        {
-            Assert.True(true);
-        }
+        Assert.True(true);
     }
 }

@@ -73,7 +73,14 @@ paths:
                     firstName: Gigel
                     lastName: Anton
                     email: gigel.anton@gmail.com
-                    profilePic: 'https://robohash.org/gigel.png'
+                    profilePic: 'https://i.pravatar.cc/150?u=gigel.png'
+                Maricica:
+                  value:
+                    id: 4f740754-574b-11ec-bf63-0242ac130002
+                    firstName: Maricica
+                    lastName: Pop
+                    email: maricica.pop@gmail.com
+                    profilePic: 'https://i.pravatar.cc/150?u=maricica.png'
       operationId: get-user
       parameters: []
     put:
@@ -95,64 +102,40 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+            examples:
+              User:
+                value:
+                  id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                  firstName: Anca
+                  lastName: Pop
+                  email: anca@gmail.com
+                  profilePic: 'https://robohash.org/anca.png'
       tags:
         - User
     parameters:
       - $ref: '#/components/parameters/userId'
-  /Org:
-    post:
-      summary: Create an Organization
-      operationId: post-org
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-      requestBody:
-        $ref: '#/components/requestBodies/Organization'
-      tags:
-        - Organization
-    parameters: []
-  '/Org/{orgId}':
-    get:
-      summary: Get Organization Info
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-      operationId: get-org
-      tags:
-        - Organization
-    put:
-      summary: Update Organization Info
-      operationId: put-org
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-      requestBody:
-        $ref: '#/components/requestBodies/Organization'
-      tags:
-        - Organization
-    delete:
-      summary: Delete an Organization
-      operationId: delete-org
-      responses:
-        '202':
-          description: Accepted
-      description: ''
-      tags:
-        - Organization
+  '/User/{userId}/orgs':
     parameters:
-      - $ref: '#/components/parameters/orgId'
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Organizations a User is In
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrgId'
+              examples:
+                SampleList:
+                  value:
+                    - fbbb7a98-5cc7-11ec-bf63-0242ac130002
+                    - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      operationId: get-User-userId-orgs
+      description: ''
   '/Org/{orgId}/users':
     parameters:
       - $ref: '#/components/parameters/orgId'
@@ -170,6 +153,92 @@ paths:
               items:
                 $ref: '#/components/schemas/User'
       description: ''
+  /Org:
+    post:
+      summary: Create an Organization
+      operationId: post-org
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                NewOrg:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: NewOrg
+                    users:
+                      - c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                    projects:
+                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    logo: 'https://robohash.org/logo.png'
+      requestBody:
+        $ref: '#/components/requestBodies/Organization'
+      tags:
+        - Organization
+    parameters: []
+  '/Org/{orgId}':
+    get:
+      summary: Get Organization Info
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                SchoolProject:
+                  value:
+                    id: fbbb7a98-5cc7-11ec-bf63-0242ac130002
+                    name: School Project
+                    logo: 'https://logo.clearbit.com/schoola.com'
+                WorkTeam:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: WorkTeam
+                    logo: 'https://logo.clearbit.com/fullstory.com'
+      operationId: get-org
+      tags:
+        - Organization
+    put:
+      summary: Update Organization Info
+      operationId: put-org
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                UpdateOrgInfo:
+                  value:
+                    id: fbbb79c6-5cc7-11ec-bf63-0242ac130002
+                    name: Another Organization
+                    users:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                    projects:
+                      - fbbb7c3c-5cc7-11ec-bf63-0242ac130002
+                    logo: 'https://robohash.org/other.png'
+      requestBody:
+        $ref: '#/components/requestBodies/Organization'
+      tags:
+        - Organization
+    delete:
+      summary: Delete an Organization
+      operationId: delete-org
+      responses:
+        '202':
+          description: Accepted
+      description: ''
+      tags:
+        - Organization
+    parameters:
+      - $ref: '#/components/parameters/orgId'
   '/Org/{orgId}/user/{userId}':
     parameters:
       - $ref: '#/components/parameters/orgId'
@@ -181,6 +250,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '404':
+          description: Not Found
       operationId: get-org-rgId-user-userId
     post:
       summary: Add a user to an Organization
@@ -188,6 +259,10 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                type: 'null'
       tags:
         - Organization
     delete:
@@ -215,7 +290,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/ProjectSummary'
       tags:
         - Project
         - Organization
@@ -236,6 +311,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectId'
+              examples:
+                OrgProjects:
+                  value:
+                    - 2ef92afa-5cd6-11ec-bf63-0242ac130002
+                    - 497f6eca-6276-4993-bfeb-53cbbbba6f08
       operationId: get-org-orgId-projects
   '/Org/{orgId}/project/{projectId}':
     parameters:
@@ -263,7 +343,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectSummary'
+              examples:
+                FirstGetAllInDetail:
+                  value:
+                    id: 2ef92afa-5cd6-11ec-bf63-0242ac130002
+                    name: FirstExample
+                SecondExample:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    name: Second Example
       operationId: get-org-orgId-project-projectId
     put:
       summary: Update Project Info
@@ -303,6 +392,57 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TopicSummary'
+              examples:
+                FirstGet:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      type: simple
+                      title: Simple Topic
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    - id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                      type: complex
+                      title: Complex Topic
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                SecondProject:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      type: simple
+                      title: Simple Topic 2
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    - id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                      type: complex
+                      title: Complex Topic 2
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
+                      activeUsers:
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 4f740754-574b-11ec-bf63-0242ac130002
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                        - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
       operationId: get-Project-projectId-topics
       description: ''
   '/Project/{projectId}/topic':
@@ -318,10 +458,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                First:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    type: simple
+                    title: Simple Topic
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                    activeUsers:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    iterations:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    creationDate: '2019-08-24T14:15:22Z'
       requestBody:
         $ref: '#/components/requestBodies/Topic'
       tags:
         - Project
+  '/Project/{projectId}/org':
+    parameters:
+      - $ref: '#/components/parameters/projectId'
+    get:
+      summary: Get Parent Organization of Project
+      tags:
+        - Project
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parent:
+                    $ref: '#/components/schemas/OrgId'
+              examples:
+                GerParentOrg:
+                  value:
+                    parent: fbbb7a98-5cc7-11ec-bf63-0242ac130002
+      operationId: get-Project-projectId-org
   '/Topic/{topicId}':
     get:
       summary: Get Topic Info
@@ -334,7 +513,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                Simple:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    type: simple
+                    title: Simple Topic
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                    activeUsers:
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    iterations:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    creationDate: '2019-08-24T14:15:22Z'
+                Complex:
+                  value:
+                    id: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
+                    type: complex
+                    title: Complex Topic
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    highlightedProposal: 4f740326-574b-11ec-bf63-0242ac130002
+                    activeUsers:
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 4f740754-574b-11ec-bf63-0242ac130002
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                      - 01143f01-7b4a-4aad-8e87-6de87e34d9cc
+                    currentIteration: 4f740628-574b-11ec-bf63-0242ac130002
+                    iterations:
+                      - 4f740628-574b-11ec-bf63-0242ac130002
+                    creationDate: '2019-08-24T14:15:22Z'
       operationId: get-Topic-topicId
+      description: ''
     parameters:
       - $ref: '#/components/parameters/topicId'
   '/Topic/{topicId}/iterations':
@@ -346,15 +560,130 @@ paths:
         required: true
     get:
       summary: Get Detailed Iterations Info
-      tags: []
-      responses: {}
+      tags:
+        - Topic
       operationId: get-Topic-topicId-iterations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Iteration'
+              examples:
+                TopicIterations:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      position: 3
+                      open: true
+                      goal: string
+                      description: I need a good description!!
+                      files:
+                        - string
+                      comments:
+                        lastActiveUsers:
+                          - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        commentsAmount: 0
+                        lastCommentDate: '2019-08-24T14:15:22Z'
+                      deadline: '2019-08-24T14:15:22Z'
+                      timeline:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          description: string
+                          author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                          creationDate: '2019-08-24T14:15:22Z'
+                          files:
+                            - string
+                          comments:
+                            lastActiveUsers:
+                              - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                            commentsAmount: 0
+                            lastCommentDate: '2019-08-24T14:15:22Z'
+                          rating:
+                            '1': 0
+                            '2': 0
+                            '3': 0
+                            '4': 0
+                            '5': 0
+                            yourVote:
+                              - 1
+                            average: 0
+      description: ''
     post:
       summary: Create an Iteration
       operationId: post-Topic-topicId-iterations
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iteration'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Iteration'
+            examples:
+              example-1:
+                value:
+                  id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                  position: 3
+                  open: true
+                  goal: string
+                  description: string
+                  files:
+                    - string
+                  comments:
+                    lastActiveUsers:
+                      - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    commentsAmount: 0
+                    lastCommentDate: '2019-08-24T14:15:22Z'
+                  deadline: '2019-08-24T14:15:22Z'
+                  timeline:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      description: string
+                      author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                      creationDate: '2019-08-24T14:15:22Z'
+                      files:
+                        - string
+                      comments:
+                        lastActiveUsers:
+                          - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        commentsAmount: 0
+                        lastCommentDate: '2019-08-24T14:15:22Z'
+                      rating:
+                        '1': 0
+                        '2': 0
+                        '3': 0
+                        '4': 0
+                        '5': 0
+                        yourVote:
+                          - 1
+                        average: 0
+  '/Topic/{topicId}/project':
+    parameters:
+      - $ref: '#/components/parameters/topicId'
+    get:
+      summary: Get Parent Project of a Topic
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parent:
+                    $ref: '#/components/schemas/ProjectId'
+              examples:
+                ProjectParentFirstExample:
+                  value:
+                    parent: 2ef92afa-5cd6-11ec-bf63-0242ac130002
+      operationId: get-Topic-topicId-project
+      tags:
+        - Topic
   '/Iteration/{iterationId}':
     parameters:
       - schema:
@@ -364,8 +693,183 @@ paths:
         required: true
     get:
       summary: Get info about an Iteration
-      tags: []
-      responses: {}
+      tags:
+        - Topic
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iteration'
+              examples:
+                TopicIteration:
+                  value:
+                    id: 4f740628-574b-11ec-bf63-0242ac130002
+                    position: 3
+                    open: true
+                    goal: Goal
+                    description: Idea description
+                    files:
+                      - string
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    deadline: '2019-08-29T14:15:22Z'
+                    timeline:
+                      - id: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                        description: Lorem ipsum first
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        creationDate: '2019-08-24T14:15:22Z'
+                        files:
+                          - string
+                        comments:
+                          lastActiveUsers:
+                            - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          commentsAmount: 0
+                          lastCommentDate: '2019-08-24T14:15:22Z'
+                        rating:
+                          '1': 0
+                          '2': 0
+                          '3': 0
+                          '4': 0
+                          '5': 0
+                          yourVote:
+                            - 1
+                          average: 0
+            application/xml:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  position:
+                    type: number
+                  open:
+                    type: boolean
+                  goal:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  files:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  comments:
+                    type: object
+                    properties:
+                      lastActiveUsers:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      commentsAmount:
+                        type: number
+                      lastCommentDate:
+                        type: string
+                        minLength: 1
+                    required:
+                      - lastActiveUsers
+                      - commentsAmount
+                      - lastCommentDate
+                  deadline:
+                    type: string
+                    minLength: 1
+                  timeline:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - id
+                        - description
+                        - author
+                        - creationDate
+                      properties:
+                        id:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        author:
+                          type: string
+                          minLength: 1
+                        creationDate:
+                          type: string
+                          minLength: 1
+                        files:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                        comments:
+                          type: object
+                          properties:
+                            lastActiveUsers:
+                              type: array
+                              items:
+                                required: []
+                                properties: {}
+                          required:
+                            - lastActiveUsers
+                        rating:
+                          type: object
+                          properties:
+                            yourVote:
+                              type: array
+                              items:
+                                required: []
+                                properties: {}
+                          required:
+                            - yourVote
+                required:
+                  - id
+                  - position
+                  - open
+                  - goal
+                  - description
+                  - files
+                  - comments
+                  - deadline
+                  - timeline
+                x-examples:
+                  example-1:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    position: 3
+                    open: true
+                    goal: string
+                    description: string
+                    files:
+                      - string
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    deadline: '2019-08-24T14:15:22Z'
+                    timeline:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        description: string
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        creationDate: '2019-08-24T14:15:22Z'
+                        files:
+                          - null
+                        comments:
+                          lastActiveUsers: []
+                        rating:
+                          yourVote: []
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
       operationId: get-Iteration-iterationId
     put:
       summary: Update an Iteration
@@ -388,7 +892,8 @@ paths:
         required: true
     get:
       summary: Get Timeline of an Interation
-      tags: []
+      tags:
+        - Topic
       responses: {}
       operationId: get-Iteration-iterationId-timeline
   '/Iteration/{iterationId}/proposal':
@@ -404,6 +909,17 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+      tags:
+        - Topic
   '/Proposal/{proposalId}':
     parameters:
       - schema:
@@ -413,7 +929,8 @@ paths:
         required: true
     get:
       summary: Get Proposal
-      tags: []
+      tags:
+        - Topic
       responses:
         '200':
           description: OK
@@ -421,6 +938,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Proposal'
+              examples:
+                SimpleTopicProposal:
+                  value:
+                    id: 2ff3e4c8-5744-11ec-bf63-0242ac130002
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    creationDate: '2019-08-24T14:15:22Z'
+                    files:
+                      - 'https://source.unsplash.com/random/800x600'
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    rating:
+                      '1': 0
+                      '2': 0
+                      '3': 0
+                      '4': 0
+                      '5': 0
+                      yourVote:
+                        - 1
+                      average: 0
+                ComplexTopicProposal:
+                  value:
+                    id: 4f740326-574b-11ec-bf63-0242ac130002
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget commodo leo, in tristique elit. Nulla eleifend lacus a tristique varius. Sed ligula enim, tristique eget posuere quis, blandit eget ex. Nullam a sapien et velit dictum dapibus accumsan ut ligula. Nullam euismod nisl neque, ut euismod risus accumsan eu. Aliquam in quam eleifend, feugiat elit nec, sagittis nibh. Etiam quis tincidunt nulla, at tempus felis.'
+                    author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                    creationDate: '2019-08-24T14:15:22Z'
+                    files:
+                      - 'https://source.unsplash.com/random/800x600'
+                    comments:
+                      lastActiveUsers:
+                        - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      commentsAmount: 0
+                      lastCommentDate: '2019-08-24T14:15:22Z'
+                    rating:
+                      '1': 0
+                      '2': 0
+                      '3': 0
+                      '4': 0
+                      '5': 0
+                      yourVote:
+                        - 1
+                      average: 0
       operationId: get-Proposal-proposalId
     put:
       summary: Update Proposal
@@ -448,6 +1010,18 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        description: |-
+          `replyTo` should be id of comment you are replying to, if you are replying to one  
+          `proposal` shouldn't be in the object but i don't know how to make the field readonly
   '/Proposal/{proposalId}/comments':
     parameters:
       - schema:
@@ -458,7 +1032,13 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentSection'
       operationId: get-Proposal-proposalId-comments
   '/Proposal/{proposalId}/comment/{commentId}':
     parameters:
@@ -473,9 +1053,15 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get Comment Info
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
       operationId: get-Proposal-proposalId-comment-commentId
     patch:
       summary: Add Third-Party additions to Comments
@@ -500,7 +1086,13 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
       operationId: get-Event-eventId
 components:
   schemas:
@@ -568,20 +1160,10 @@ components:
           $ref: '#/components/schemas/OrgId'
         name:
           type: string
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-        projects:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectId'
         logo:
           oneOf:
             - type: string
-              properties: {}
-            - properties: {}
-              type: 'null'
+            - type: 'null'
       required:
         - id
         - name
@@ -608,16 +1190,17 @@ components:
           $ref: '#/components/schemas/ProjectId'
         name:
           type: string
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopicSummary'
-          readOnly: true
     Project:
       title: Project
       allOf:
         - $ref: '#/components/schemas/ProjectSummary'
         - type: object
+          properties:
+            topics:
+              type: array
+              items:
+                $ref: '#/components/schemas/TopicSummary'
+              readOnly: true
     TopicId:
       type: string
       title: TopicId
@@ -634,6 +1217,7 @@ components:
           enum:
             - simple
             - complex
+          readOnly: true
         title:
           type: string
         author:
@@ -644,8 +1228,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserId'
+          readOnly: true
         currentIteration:
           $ref: '#/components/schemas/IterationId'
+      required:
+        - title
     Topic:
       title: Topic
       allOf:
@@ -656,9 +1243,11 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/IterationId'
+              readOnly: true
             creationDate:
               type: string
               format: date-time
+              readOnly: true
     IterationId:
       type: string
       title: IterationId
@@ -673,8 +1262,11 @@ components:
         position:
           type: number
           example: 3
+          readOnly: true
         open:
           type: boolean
+          default: true
+          readOnly: true
         goal:
           type: string
         description:
@@ -690,6 +1282,9 @@ components:
           format: date-time
         timeline:
           $ref: '#/components/schemas/Timeline'
+      required:
+        - goal
+        - description
     CommentSection:
       title: CommentSection
       type: object
@@ -722,6 +1317,7 @@ components:
         creationDate:
           type: string
           format: date-time
+          readOnly: true
         rating:
           $ref: '#/components/schemas/Rating'
         replyTo:
@@ -732,9 +1328,11 @@ components:
           oneOf:
             - $ref: '#/components/schemas/ProposalId'
             - type: 'null'
+      required:
+        - content
     CommentsSummary:
-      title: CommentsSummary
       type: object
+      title: CommentsSummary
       properties:
         lastActiveUsers:
           type: array
@@ -747,14 +1345,16 @@ components:
         lastCommentDate:
           type: string
           format: date-time
+      readOnly: true
     Timeline:
+      type: array
       title: Timeline
       description: ''
-      type: array
       items:
         anyOf:
           - $ref: '#/components/schemas/Proposal'
           - $ref: '#/components/schemas/Event'
+      readOnly: true
     ProposalId:
       type: string
       title: ProposalId
@@ -773,6 +1373,7 @@ components:
         creationDate:
           type: string
           format: date-time
+          readOnly: true
         files:
           type: array
           items:
@@ -781,6 +1382,8 @@ components:
           $ref: '#/components/schemas/CommentsSummary'
         rating:
           $ref: '#/components/schemas/Rating'
+      required:
+        - description
     EventId:
       type: string
       title: EventId
@@ -857,8 +1460,8 @@ components:
       description: ''
       x-internal: false
     Rating:
-      title: Rating
       type: object
+      title: Rating
       properties:
         '1':
           type: number
@@ -891,6 +1494,7 @@ components:
           maximum: 5
           format: float
           readOnly: true
+      readOnly: true
   securitySchemes:
     simpleauth:
       type: oauth2
@@ -950,7 +1554,9 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Topic'
+            allOf:
+              - $ref: '#/components/schemas/TopicSummary'
+              - $ref: '#/components/schemas/Iteration'
   parameters:
     orgId:
       name: orgId

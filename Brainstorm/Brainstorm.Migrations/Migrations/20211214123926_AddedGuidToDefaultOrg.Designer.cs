@@ -3,6 +3,7 @@ using System;
 using Brainstorm.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Booking.Migrations.Migrations
 {
     [DbContext(typeof(BrainstormContext))]
-    partial class BrainstormContextModelSnapshot : ModelSnapshot
+    [Migration("20211214123926_AddedGuidToDefaultOrg")]
+    partial class AddedGuidToDefaultOrg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,9 +45,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = new Guid("b4537261-2ede-4af5-95fc-ea54706a987b"),
-
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
@@ -58,27 +58,14 @@ namespace Booking.Migrations.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LogoLink")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name");
-
                     b.ToTable("Organizations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ca69c6ff-2c15-4e77-ac96-cb04e0b8f258"),
-                            LogoLink = "https://robohash.org/test-org",
-                            Name = "Test Organization"
-                        });
-
                 });
 
             modelBuilder.Entity("Brainstorm.Entities.User.User", b =>
@@ -130,7 +117,6 @@ namespace Booking.Migrations.Migrations
                         new
                         {
                             Id = new Guid("0e212db6-8185-4955-b7cf-ffb1c31b39b2"),
-
                             Email = "test@test.ro",
                             FirstName = "test",
                             LastName = "test",

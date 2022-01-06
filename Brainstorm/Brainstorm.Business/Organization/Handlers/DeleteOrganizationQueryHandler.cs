@@ -36,13 +36,7 @@ public class DeleteOrganizationQueryHandler : IRequestHandler<DeleteOrganization
             throw new Exception("User doesn't exists");
         }
         
-        
-        if (org.Users.FirstOrDefault(u => u.Id == userId) is not null)
-        {
-            throw new Exception("User is already a member in the organization.");
-        }
-
-        org.Users.Add(user);
+        org.Users.Remove(user);
         _ctx.SaveChanges();
 
         return Task.FromResult(new DeleteOrganizationResponse());

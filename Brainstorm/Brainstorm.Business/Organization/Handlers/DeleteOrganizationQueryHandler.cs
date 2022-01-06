@@ -36,7 +36,8 @@ public class DeleteOrganizationQueryHandler : IRequestHandler<DeleteOrganization
             throw new Exception("User doesn't exists");
         }
         
-        org.Users.Remove(user);
+        _ctx.Organizations.Remove(org); //Aici trebuie sa verific daca userul dat este creatorul organizatiei, 
+        // si daca este doar dupa sa sterg organizatia.
         _ctx.SaveChanges();
 
         return Task.FromResult(new DeleteOrganizationResponse());

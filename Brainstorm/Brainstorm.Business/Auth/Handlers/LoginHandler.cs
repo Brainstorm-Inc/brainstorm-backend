@@ -29,6 +29,12 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
             throw new Exception($"User with email address {request.Email} does not exist.");
         }
 
+        var hash = Utils.GenerateSaltedHash(request.Password, user.Salt);
+
+        if (hash != user.Password) {
+          throw new Exception("Wrong credentials.");
+        }
+
         var token = AuthUtils.GenerateToken(request.Email);
 
         var res = new LoginResponse

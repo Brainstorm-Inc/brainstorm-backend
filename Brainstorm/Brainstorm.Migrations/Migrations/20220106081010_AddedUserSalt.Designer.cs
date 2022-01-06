@@ -3,6 +3,7 @@ using System;
 using Brainstorm.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Booking.Migrations.Migrations
 {
     [DbContext(typeof(BrainstormContext))]
-    partial class BrainstormContextModelSnapshot : ModelSnapshot
+    [Migration("20220106081010_AddedUserSalt")]
+    partial class AddedUserSalt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

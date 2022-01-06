@@ -32,6 +32,9 @@ public class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(u => u.ProfilePicture)
             .HasDefaultValue("https://robohash.org/first-last");
 
+        builder.Property(u => u.Salt)
+          .IsRequired();
+
         builder.HasData(
             new User
             {
@@ -40,6 +43,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
                 LastName = "test",
                 Email = "test@test.ro",
                 Password = "password",
+                Salt = ""
             });
     }
 }

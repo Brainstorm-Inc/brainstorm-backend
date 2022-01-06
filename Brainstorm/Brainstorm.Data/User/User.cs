@@ -7,6 +7,7 @@ public class User : BaseEntity
     public string Email { get; init; }
     public string Password { get; init; }
     public string ProfilePicture { get; init; }
+    public string Salt { get; set; }
 
     public Organization.Organization Org { get; set; }
 }

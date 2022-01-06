@@ -20,7 +20,7 @@ public class OrgController : ControllerBase
     [HttpGet("{orgId}/users")]
     public async Task<ActionResult> GetOrgMembers([FromRoute] string orgId)
     {
-        var res = await _mediator.Send(new GetOrgMembersQuery {OrgId = orgId});
+        var res = await _mediator.Send(new GetOrgMembersQuery { OrgId = orgId });
 
         return Ok(res);
     }
@@ -28,15 +28,18 @@ public class OrgController : ControllerBase
     [HttpGet("{orgId}/user/{userId}")]
     public async Task<ActionResult> CheckUserInOrg([FromRoute] string orgId, [FromRoute] string userId)
     {
-        await _mediator.Send(new CheckUserInOrgQuery {OrgId = orgId, UserId = userId});
+        await _mediator.Send(new CheckUserInOrgQuery { OrgId = orgId, UserId = userId });
 
         return NoContent();
     }
-    
-    [HttpPost("{orgId}/update/{creatorId}")] //Aici e ok ????
-    public async Task<ActionResult> UpdateOrganizationInfo([FromBody] UpdateOrgInfoRequest request,string creatorId)
+
+    [HttpDelete("{orgId}/update/{userId}")]
+    public async Task<ActionResult> RemoveUserFromOrg([FromRoute] string orgId, [FromRoute] string userId,
+        [FromBody] string name, [FromBody] string logo)
     {
-        var res = await _mediator.Send(request.ToCommand(creatorId));
-        return Ok(res);
+        await _mediator.Send(new UpdateOrganizationInfoQuery()
+            { OrgId = orgId, UserId = userId, Name = name, Logo = logo });
+
+        return Accepted();
     }
 }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Brainstorm.API.Requests;
 using Brainstorm.Business.Organization.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -30,5 +31,12 @@ public class OrgController : ControllerBase
         await _mediator.Send(new CheckUserInOrgQuery {OrgId = orgId, UserId = userId});
 
         return NoContent();
+    }
+    
+    [HttpPost("{orgId}/update/{creatorId}")] //Aici e ok ????
+    public async Task<ActionResult> UpdateOrganizationInfo([FromBody] UpdateOrgInfoRequest request,string creatorId)
+    {
+        var res = await _mediator.Send(request.ToCommand(creatorId));
+        return Ok(res);
     }
 }

@@ -31,4 +31,11 @@ public class OrgController : ControllerBase
 
         return NoContent();
     }
+    
+    [HttpDelete("{orgId}")]
+    public async Task<ActionResult> DeleteOrganization([FromRoute] string orgId, [FromBody]string creatorId)
+    {
+        var res = await _mediator.Send(request.ToCommand(creatorId));
+        return Ok(res);
+    }
 }

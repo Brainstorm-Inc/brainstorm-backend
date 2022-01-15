@@ -51,4 +51,20 @@ public class OrgController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("{orgId}/user/{userId}")]
+    public async Task<ActionResult> AddUserToOrg([FromRoute] string orgId, [FromRoute] string userId)
+    {
+        await _mediator.Send(new AddUserToOrgQuery { OrgId = orgId, UserId = userId });
+
+        return Created("",null);
+    }
+
+    [HttpDelete("{orgId}/user/{userId}")]
+    public async Task<ActionResult> RemoveUserFromOrg([FromRoute] string orgId, [FromRoute] string userId)
+    {
+        await _mediator.Send(new RemoveUserFromOrgQuery { OrgId = orgId, UserId = userId });
+
+        return Accepted();
+    }
 }

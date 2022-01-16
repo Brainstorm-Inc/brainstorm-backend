@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Brainstorm.Business.AppVersions.Queries;
+using Brainstorm.API.Requests;
 using Brainstorm.Business.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,6 @@ public class UserController : ControllerBase
     {
         _mediator = mediator;
     }
-   
         
     [HttpGet("{userId}")]
     public async Task<ActionResult<string>> GetUser(string userId) {
@@ -28,6 +27,13 @@ public class UserController : ControllerBase
     [HttpGet("{userId}/orgs")]
     public async Task<ActionResult<string>> GetOrgsForUser(string userId) {
         var res = await _mediator.Send(new GetUserOrgsQuery(){UserId = Guid.Parse(userId)});
+        return Ok(res);
+    }
+    
+    [HttpPut("{userId}")]
+    public async Task<ActionResult<string>> UpdateUser([FromRoute] string userId, [FromBody] UpdateUserRequest request) {
+        var id = Guid.Parse(userId);
+        var res = await _mediator.Send(request.ToCommand(id));
         return Ok(res);
     }
 }

@@ -40,7 +40,7 @@ public class GetOrgMembersHandler : IRequestHandler<GetOrgMembersQuery, OrgMembe
             usersDetails.Add(user.ToUserDetails());
         }
         
-        var res = new OrgMembers {users = usersDetails.ToList()};
+        var res = new OrgMembers {usersDetails = usersDetails.ToList()};
 
         return Task.FromResult(res);
     }

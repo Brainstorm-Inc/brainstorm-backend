@@ -1,7 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dee95d54_002D87ef_002D4f07_002D9c64_002Da1d984405e57/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\Alex\Projects\brainstorm-backend\Brainstorm\Brainstorm.UnitTests" Presentation="&amp;lt;Brainstorm.UnitTests&amp;gt;" /&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dee95d54_002D87ef_002D4f07_002D9c64_002Da1d984405e57/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="C:\Users\Alex\Projects\brainstorm-backend\Brainstorm\Brainstorm.UnitTests" Presentation="&amp;lt;Brainstorm.UnitTests&amp;gt;" /&gt;
 
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

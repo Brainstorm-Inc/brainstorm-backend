@@ -473,9 +473,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Topic'
               examples:
-                First:
+                SimpleTopicCreated:
                   value:
-                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    id: e4770883-3cac-4f75-8db0-4f9a67555425
                     type: simple
                     title: Simple Topic
                     author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd

@@ -5,7 +5,6 @@ namespace Brainstorm.API.Requests;
 
 public class UpdateUserRequest
 {
-    public Guid Id { get; set; }
     public string FirstName { get; init; }
     public string LastName { get; init; }
     

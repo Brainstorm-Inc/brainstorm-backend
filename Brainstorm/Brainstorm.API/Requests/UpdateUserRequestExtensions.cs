@@ -6,11 +6,11 @@ namespace Brainstorm.API.Requests;
 
 public static class UpdateUserRequestExtensions
 {
-    public static UpdateUserCommand ToCommand(this UpdateUserRequest request, Guid id)
+    public static UpdateUserCommand ToCommand(this UpdateUserRequest request, Guid userId)
     {
         return new UpdateUserCommand
         {
-            Id = request.Id,
+            Id = userId,
             FirstName = request.FirstName,
             LastName = request.LastName,
             ProfilePicture = request.ProfilePicture,

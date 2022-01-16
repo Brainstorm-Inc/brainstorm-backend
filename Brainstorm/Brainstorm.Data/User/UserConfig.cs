@@ -32,6 +32,9 @@ public class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(u => u.ProfilePicture)
             .HasDefaultValue("https://robohash.org/first-last");
 
+        builder.HasOne(u => u.Org)
+            .WithMany(o => o.Users);
+
         builder.HasData(
             new User
             {

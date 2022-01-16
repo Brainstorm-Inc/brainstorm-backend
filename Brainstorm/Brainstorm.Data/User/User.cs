@@ -1,3 +1,5 @@
+using System;
+
 namespace Brainstorm.Entities.User;
 
 public class User : BaseEntity

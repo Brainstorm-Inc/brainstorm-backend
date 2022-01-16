@@ -43,9 +43,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-
-                            Id = new Guid("b4537261-2ede-4af5-95fc-ea54706a987b"),
-
+                            Id = new Guid("3bfba075-e736-456e-b818-883c8579d3c0"),
                             MajorVersion = 0,
                             MinorVersion = 1
                         });
@@ -74,11 +72,10 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ca69c6ff-2c15-4e77-ac96-cb04e0b8f258"),
+                            Id = new Guid("5b649d60-d379-474d-9fd3-ca16dd9277d9"),
                             LogoLink = "https://robohash.org/test-org",
                             Name = "Test Organization"
                         });
-
                 });
 
             modelBuilder.Entity("Brainstorm.Entities.User.User", b =>
@@ -129,8 +126,7 @@ namespace Booking.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0e212db6-8185-4955-b7cf-ffb1c31b39b2"),
-
+                            Id = new Guid("5cb0c1de-a77a-461c-a68d-003c240a0573"),
                             Email = "test@test.ro",
                             FirstName = "test",
                             LastName = "test",

@@ -23,6 +23,12 @@ public class UserController : ControllerBase
     public async Task<ActionResult<string>> GetUser(string userId) {
         var res = await _mediator.Send(new GetUserQuery{UserId = Guid.Parse(userId)});
         return Ok(res);
-    }   
+    }
+    
+    [HttpGet("{userId}/orgs")]
+    public async Task<ActionResult<string>> GetOrgsForUser(string userId) {
+        var res = await _mediator.Send(new GetUserOrgsQuery(){UserId = Guid.Parse(userId)});
+        return Ok(res);
+    }
 }
 

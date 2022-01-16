@@ -1181,6 +1181,16 @@ components:
       required:
         - id
         - name
+        - users
+        - projects
+      examples:
+        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          name: string
+          users:
+            - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          projects:
+            - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          logo: string
     ProjectId:
       type: string
       title: ProjectId

@@ -1,4 +1,5 @@
 using Brainstorm.Entities.AppVersion;
+using Brainstorm.Entities.Organization;
 using Brainstorm.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,5 +23,6 @@ public class BrainstormContext : DbContext
     {
         builder.ApplyConfiguration(new AppVersionConfig());
         builder.ApplyConfiguration(new UserConfig());
+        builder.ApplyConfiguration(new OrganizationConfig());
     }
 }

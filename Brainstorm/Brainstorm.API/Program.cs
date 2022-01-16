@@ -1,9 +1,13 @@
 using System.Text;
+using Brainstorm.API.Requests;
 using Brainstorm.Business.AppVersions.Handlers;
 using Brainstorm.Entities;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +23,13 @@ builder.Services.AddMediatR(typeof(GetVersionQueryHandler));
 builder.Services.AddDbContext<BrainstormContext>(opts =>
     opts.UseNpgsql(config.GetConnectionString("SqlConnection")));
 builder.Services.AddControllers();
+builder.Services.AddMvc().AddFluentValidation(fv => 
+{
+    fv.RegisterValidatorsFromAssemblyContaining<SignupRequestValidator>();
+    fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>();
+    fv.RegisterValidatorsFromAssemblyContaining<UpdateUserRequestValidator>();
+});
+
 builder.Services.AddCors(opts => opts.AddDefaultPolicy(
     corsPolicyBuilder =>
     {

@@ -6,5 +6,5 @@ namespace Brainstorm.Business.Organization.Responses;
 
 public class OrgMembers
 {
-    public List<UserDetails> users { get; init; }
+    public List<UserDetails> usersDetails { get; init; }
 }

@@ -7,7 +7,7 @@ using Brainstorm.Business.Organization.Responses;
 using Brainstorm.Entities;
 using MediatR;
 
-namespace Brainstorm.Business.AppVersions.Handlers;
+namespace Brainstorm.Business.Organization.Handlers;
 
 public class CheckUserInOrgQueryHandler : IRequestHandler<CheckUserInOrgQuery, CheckUserInOrgResponse>
 {

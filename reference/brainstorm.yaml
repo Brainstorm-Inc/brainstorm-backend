@@ -286,6 +286,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+              examples:
+                third project:
+                  value:
+                    id: 5b9014b2-7648-11ec-90d6-0242ac120003
+                    name: thirdProject
+                    topics:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        type: simple
+                        title: string
+                        author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+                        highlightedProposal: a3ae4c17-e298-431e-a906-2e70834aac9a
+                        activeUsers:
+                          - 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        currentIteration: c80af5c7-eb9c-4f3e-b9d9-873d8290ffb5
       requestBody:
         content:
           application/json:

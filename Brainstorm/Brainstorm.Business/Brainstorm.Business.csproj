@@ -15,4 +15,9 @@
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.14.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Proposal\Commands" />
+      <Folder Include="Proposal\Responses" />
+    </ItemGroup>
+
 </Project>

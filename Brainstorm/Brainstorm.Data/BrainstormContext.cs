@@ -17,6 +17,8 @@ public class BrainstormContext : DbContext
     public DbSet<AppVersion.AppVersion> AppVersions { get; init; }
     public DbSet<User.User> Users { get; init; }
     public DbSet<Organization.Organization> Organizations { get; init; }
+    
+    public DbSet<Proposal.Proposal> Proposals { get; init; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -6,6 +6,7 @@ using Brainstorm.Business.Organization.Queries;
 using Brainstorm.Business.Organization.Responses;
 using Brainstorm.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brainstorm.Business.Organization.Handlers;
 
@@ -21,7 +22,9 @@ public class AddUserToOrgQueryHandler : IRequestHandler<AddUserToOrgQuery, AddUs
     public Task<AddUserToOrgResponse> Handle(AddUserToOrgQuery request, CancellationToken cancellationToken)
     {
         var orgId = Guid.Parse(request.OrgId);
-        var org = _ctx.Organizations.FirstOrDefault(o => o.Id == orgId);
+        var org = _ctx.Organizations
+            .Include(org => org.Users)
+            .FirstOrDefault(o => o.Id == orgId);
 
         if (org is null)
         {

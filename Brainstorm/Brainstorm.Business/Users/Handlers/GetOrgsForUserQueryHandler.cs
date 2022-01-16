@@ -7,6 +7,7 @@ using Brainstorm.Business.Users.Queries;
 using Brainstorm.Business.Users.Responses;
 using Brainstorm.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brainstorm.Business.Users.Handlers;
 
@@ -27,6 +28,7 @@ public class GetOrgsForUserQueryHandler : IRequestHandler<GetUserOrgsQuery, Orgs
         }
 
         var currentUser = _ctx.Users
+            .Include(user => user.Org)
             .FirstOrDefault(user => user.Id == request.UserId);
         
         if (currentUser.Org is null)

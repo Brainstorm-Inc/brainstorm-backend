@@ -26,6 +26,9 @@ public class OrganizationConfig : IEntityTypeConfiguration<Organization>
         builder.HasMany(o => o.Users)
             .WithOne(u => u.Org);
 
+        builder.HasMany(o => o.Projects)
+            .WithOne(p => p.Org);
+
         builder.HasData(new Organization
             {
                 Id = Guid.NewGuid(),
@@ -34,6 +37,5 @@ public class OrganizationConfig : IEntityTypeConfiguration<Organization>
                 LogoLink = "https://robohash.org/test-org"
             }
         );
-
     }
 }

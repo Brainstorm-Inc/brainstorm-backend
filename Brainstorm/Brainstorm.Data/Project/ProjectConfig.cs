@@ -12,6 +12,10 @@ public class ProjectConfig : IEntityTypeConfiguration<Project>
 
         builder.Property(u => u.Name).IsRequired();
 
-        builder.HasMany(u => u.Topics).WithOne(t => t.Project);
+        builder.HasOne(p => p.Org)
+            .WithMany(o => o.Projects);
+
+        builder.HasMany(u => u.Topics)
+            .WithOne(t => t.Project);
     }
 }

@@ -9,7 +9,8 @@ public static class OrganizationExtensions
         return new OrgsDetails()
         {
             Id = organization.Id.ToString(),
-            Name = organization.Name.ToString(),
+            Name = organization.Name,
+            Logo = organization.LogoLink,
         };
     }
 }

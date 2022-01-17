@@ -4,5 +4,6 @@ namespace Brainstorm.Business.Users.Responses
     {
         public string Id { get; init; }
         public string Name { get; init; }
+        public string Logo { get; set; }
     }
 }

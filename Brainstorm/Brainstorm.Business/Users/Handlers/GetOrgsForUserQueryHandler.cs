@@ -28,14 +28,15 @@ public class GetOrgsForUserQueryHandler : IRequestHandler<GetUserOrgsQuery, Orgs
         }
 
         var currentUser = _ctx.Users
-            .Include(user => user.Org)
-            .FirstOrDefault(user => user.Id == request.UserId);
-        
+                              .Include(user => user.Org)
+                              .FirstOrDefault(user => user.Id == request.UserId) ??
+                          throw new Exception("User doesn't exist.");
+
         if (currentUser.Org is null)
         {
             return Task.FromResult(new OrgsDetails());
         }
-        
+
         var org = currentUser.Org.ToOrgsDetails();
 
         return Task.FromResult(org);

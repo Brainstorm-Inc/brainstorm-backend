@@ -1473,6 +1473,12 @@ components:
                   type: string
       description: ''
       x-internal: false
+      examples:
+        - id: cd296f26-16c5-43b4-9f4f-cf30c9f6d6e4
+          author: 32ad2cdb-22a2-48aa-a42c-1c53a9afc4bd
+          type: comment upgrade
+          comment: 21646be0-3d5d-4746-b39b-1529fb1afc4a
+          proposal: 3ff288a2-bd5f-417e-bd2a-5d3e831943fe
     Rating:
       type: object
       title: Rating

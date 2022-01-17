@@ -21,6 +21,8 @@ namespace Brainstorm.Business.Organization.Handlers
         
         public Task<CreateOrganizationResponse> Handle(CreateOrganizationCommand request, CancellationToken cancellationToken)
         {
+            var user = _ctx.Users.FirstOrDefault(u => u.Id == request.CreatorId) ??
+                       throw new Exception("User doesn't exist.");
             var alreadyExistingOrg = _ctx.Organizations.FirstOrDefault(u => u.Name == request.Name); 
             if (alreadyExistingOrg is not null)
             {
@@ -28,7 +30,7 @@ namespace Brainstorm.Business.Organization.Handlers
             }
             
             var org = request.ToOrganization();
-
+            org.Users.Add(user);
             _ctx.Organizations.Add(org);
             _ctx.SaveChanges();
 

@@ -33,7 +33,10 @@ public class CreateProjectInOrgCommandHandler : IRequestHandler<CreateProjectInO
             Org = org,
             Topics = new List<Topic>()
         };
-
+        if (org.Projects is null)
+        {
+            org.Projects = new List<Project>();
+        }
         org.Projects.Add(proj);
         var res = _ctx.Projects.Add(proj).Entity;
         _ctx.SaveChanges();

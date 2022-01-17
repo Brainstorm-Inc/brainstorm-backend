@@ -9,6 +9,6 @@ public class Organization : BaseEntity
 
     public string LogoLink { get; set; }
 
-    public ICollection<Project.Project> Projects { get; init; }
+    public ICollection<Project.Project> Projects { get; set; }
     public ICollection<User.User> Users { get; init; }
 }
